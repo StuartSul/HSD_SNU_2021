@@ -8,7 +8,7 @@ FPGA::FPGA(off_t data_addr, off_t output_addr, int m_size, int v_size)
 {
 	m_size_ = m_size;
 	v_size_ = v_size;
-    data_size_ = m_size_*(v_size_+1); // fpga bram data size
+    data_size_ = m_size_*(v_size_ + 1); // fpga bram data size
 	num_block_call_ = 0;
 
 	output_ = new unsigned int[m_size_]; // use output_ as tempolar output
@@ -53,7 +53,7 @@ const float* FPGA::blockMV()
 	{
 		out[i] = 0;
 		for(int j = 0; j < v_size_; ++j)
-			out[i] += vec[j] * mat[v_size_*i + j];
+			out[i] += vec[j] * mat[v_size_ * i + j];
 	}
 
 	for(int i = 0; i < m_size_; ++i)
@@ -83,7 +83,7 @@ void FPGA::largeMV(const float* large_mat, const float* input, float* output, in
 			int block_row = min(m_size_, num_output-i);
 			int block_col = min(v_size_, num_input-j);
 
-			// !) Assign a vector
+			// 1) Assign a vector
 			/* IMPLEMENT */
 
 			// 2) Assign a matrix
