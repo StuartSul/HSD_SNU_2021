@@ -1,4 +1,11 @@
+# System
 .bash_history
 .cache
 .vscode-server
 .wget-hsts
+
+# Python
+*.pyc
+
+# C++
+*.o
