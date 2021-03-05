@@ -1,9 +1,9 @@
-#include"digit_dnn.h"
-#include<cassert>
-#include<fstream>
-#include<iostream>
-#include<algorithm>
-#include<cstring>
+#include "digit_dnn.h"
+#include <cassert>
+#include <fstream>
+#include <iostream>
+#include <algorithm>
+#include <cstring>
 
 struct MatVecOp:Op
 {

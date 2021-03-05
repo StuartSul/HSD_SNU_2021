@@ -1,6 +1,6 @@
-#include"fpga_api.h"
-#include<cstring>
-#include<stdio.h>
+#include "fpga_api.h"
+#include <cstring>
+#include <stdio.h>
 
 #define min(x,y) (((x)<(y))?(x):(y))
 
@@ -11,7 +11,7 @@ FPGA::FPGA(off_t data_addr, off_t output_addr, int m_size, int v_size)
         data_size_ = m_size_*(v_size_+1); // fpga bram data size
 	num_block_call_ = 0;
 
-	output_ = new unsigned int[m_size_];    // use output_ as tempolar output
+	output_ = new unsigned int[m_size_]; // use output_ as tempolar output
         data_ = new float[data_size_];	
 }
 
@@ -100,4 +100,3 @@ void FPGA::largeMV(const float* large_mat, const float* input, float* output, in
 		} 
 	}
 }
-
