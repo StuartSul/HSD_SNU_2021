@@ -15,7 +15,7 @@ reg [2*BITWIDTH-1:0] dout_reg;
 
 always @(posedge clk)
 begin
-    dout_reg <= en ? ain * bin : 0;
+    dout_reg <= en ? dout_reg + ain * bin : 0;
 end
 
 assign dout = dout_reg;

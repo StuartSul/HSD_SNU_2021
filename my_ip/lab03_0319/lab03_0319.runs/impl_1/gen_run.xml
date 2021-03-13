@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="impl_1" LaunchPart="xc7z020clg484-1" LaunchTime="1615620064">
-  <File Type="PA-TCL" Name="my_add.tcl"/>
   <File Type="BITSTR-BMM" Name="my_add_bd.bmm"/>
-  <File Type="REPORTS-TCL" Name="my_add_reports.tcl"/>
+  <File Type="PA-TCL" Name="my_add.tcl"/>
   <File Type="OPT-DCP" Name="my_add_opt.dcp"/>
+  <File Type="REPORTS-TCL" Name="my_add_reports.tcl"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="my_add_incremental_reuse_pre_placed.rpt"/>
   <File Type="OPT-DRC" Name="my_add_drc_opted.rpt"/>
   <File Type="OPT-HWDEF" Name="my_add.hwdef"/>
   <File Type="PWROPT-DCP" Name="my_add_pwropt.dcp"/>
   <File Type="PLACE-DCP" Name="my_add_placed.dcp"/>
-  <File Type="PLACE-PRE-SIMILARITY" Name="my_add_incremental_reuse_pre_placed.rpt"/>
   <File Type="BG-BGN" Name="my_add.bgn"/>
   <File Type="POSTPLACE-PWROPT-DCP" Name="my_add_postplace_pwropt.dcp"/>
   <File Type="BG-BIN" Name="my_add.bin"/>
