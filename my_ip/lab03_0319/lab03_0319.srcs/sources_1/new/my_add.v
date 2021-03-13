@@ -10,6 +10,6 @@ module my_add #(
     output overflow
 );
 
-    assign {overflow, dout} = ain + bin;
+assign {overflow, dout} = ain + bin;
 
 endmodule
