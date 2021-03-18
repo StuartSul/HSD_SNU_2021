@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7z020clg484-1" LaunchTime="1615711544">
-  <File Type="PA-TCL" Name="floating_point_MAC.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="floating_point_MAC_drc_synth.rpt"/>
-  <File Type="REPORTS-TCL" Name="floating_point_MAC_reports.tcl"/>
-  <File Type="RDS-RDS" Name="floating_point_MAC.vds"/>
-  <File Type="RDS-UTIL" Name="floating_point_MAC_utilization_synth.rpt"/>
-  <File Type="RDS-UTIL-PB" Name="floating_point_MAC_utilization_synth.pb"/>
-  <File Type="RDS-DCP" Name="floating_point_MAC.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="floating_point_MAC_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="floating_point_MAC_timing_summary_synth.pb"/>
+<GenRun Id="synth_1" LaunchPart="xc7z020clg484-1" LaunchTime="1616052235">
+  <File Type="PA-TCL" Name="tb_adder_array.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="tb_adder_array_drc_synth.rpt"/>
+  <File Type="REPORTS-TCL" Name="tb_adder_array_reports.tcl"/>
+  <File Type="RDS-RDS" Name="tb_adder_array.vds"/>
+  <File Type="RDS-UTIL" Name="tb_adder_array_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="tb_adder_array_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="tb_adder_array.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="tb_adder_array_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="tb_adder_array_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/new/adder_array.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/my_add.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/tb_adder_array.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/ip/floating_point_MAC/floating_point_MAC.xci">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -18,17 +37,26 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/tb_lab4.v">
+    <File Path="$PSRCDIR/sources_1/ip/integer_MAC/integer_MAC.xci">
       <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/tb_integer_mac.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/tb_float_mac.v">
+      <FileInfo>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="floating_point_MAC"/>
-      <Option Name="TopLib" Val="xil_defaultlib"/>
-      <Option Name="TopRTLFile" Val="$PSRCDIR/sources_1/ip/floating_point_MAC/floating_point_MAC.xci"/>
+      <Option Name="TopModule" Val="tb_adder_array"/>
       <Option Name="TopAutoSet" Val="TRUE"/>
     </Config>
   </FileSet>
@@ -45,7 +73,9 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018">
+      <Desc>Vivado Synthesis Defaults</Desc>
+    </StratHandle>
     <Step Id="synth_design"/>
   </Strategy>
 </GenRun>

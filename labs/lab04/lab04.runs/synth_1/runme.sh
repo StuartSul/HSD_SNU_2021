@@ -40,4 +40,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log floating_point_MAC.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source floating_point_MAC.tcl
+EAStep vivado -log tb_adder_array.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source tb_adder_array.tcl
