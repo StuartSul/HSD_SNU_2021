@@ -2,7 +2,7 @@
 # It contains project source information necessary for synthesis and implementation.
 
 # IP: ip/floating_point_MAC/floating_point_MAC.xci
-set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==floating_point_MAC || ORIG_REF_NAME==floating_point_MAC} -quiet] -quiet
+# IP: The module: 'floating_point_MAC' is the root of the design. Do not add the DONT_TOUCH constraint.
 
 # IP: ip/integer_MAC/integer_MAC.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==integer_MAC || ORIG_REF_NAME==integer_MAC} -quiet] -quiet

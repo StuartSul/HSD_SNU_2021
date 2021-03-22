@@ -34,9 +34,9 @@ read_verilog -library xil_defaultlib {
   D:/HSD_SNU_2021/labs/lab04/lab04.srcs/sources_1/new/adder_array.v
   D:/HSD_SNU_2021/labs/lab04/lab04.srcs/sources_1/new/my_add.v
 }
-read_ip -quiet d:/HSD_SNU_2021/labs/lab04/lab04.srcs/sources_1/ip/floating_point_MAC/floating_point_MAC.xci
+read_ip -quiet D:/HSD_SNU_2021/labs/lab04/lab04.srcs/sources_1/ip/floating_point_MAC/floating_point_MAC.xci
 
-read_ip -quiet d:/HSD_SNU_2021/labs/lab04/lab04.srcs/sources_1/ip/integer_MAC/integer_MAC.xci
+read_ip -quiet D:/HSD_SNU_2021/labs/lab04/lab04.srcs/sources_1/ip/integer_MAC/integer_MAC.xci
 
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -51,12 +51,12 @@ set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]
 
-synth_design -top tb_adder_array -part xc7z020clg484-1
+synth_design -top floating_point_MAC -part xc7z020clg484-1
 
 
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
-write_checkpoint -force -noxdef tb_adder_array.dcp
-create_report "synth_1_synth_report_utilization_0" "report_utilization -file tb_adder_array_utilization_synth.rpt -pb tb_adder_array_utilization_synth.pb"
+write_checkpoint -force -noxdef floating_point_MAC.dcp
+create_report "synth_1_synth_report_utilization_0" "report_utilization -file floating_point_MAC_utilization_synth.rpt -pb floating_point_MAC_utilization_synth.pb"
 file delete __synthesis_is_running__
 close [open __synthesis_is_complete__ w]

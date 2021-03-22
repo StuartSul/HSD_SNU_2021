@@ -9,8 +9,8 @@ module adder_array(cmd,
     input [2:0] cmd;
     input [31:0] ain0, ain1, ain2, ain3;
     input [31:0] bin0, bin1, bin2, bin3;
-    input [31:0] dout0, dout1, dout2, dout3;
-    input [3:0] overflow;
+    output [31:0] dout0, dout1, dout2, dout3;
+    output [3:0] overflow;
     
     wire [31:0] ain [3:0];
     wire [31:0] bin [3:0];
