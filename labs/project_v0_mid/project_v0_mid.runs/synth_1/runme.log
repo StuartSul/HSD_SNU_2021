@@ -1,0 +1,344 @@
+
+*** Running vivado
+    with args -log tb_pe_array.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source tb_pe_array.tcl
+
+
+****** Vivado v2018.3 (64-bit)
+  **** SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+  **** IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+source tb_pe_array.tcl -notrace
+Command: synth_design -top tb_pe_array -part xc7z020clg484-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 5968 
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 386.684 ; gain = 98.203
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'tb_pe_array' [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/tb_pe_array.v:3]
+	Parameter INIT_FILE bound to: input.txt - type: string 
+INFO: [Synth 8-3876] $readmem data file 'input.txt' is read successfully [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/tb_pe_array.v:27]
+INFO: [Synth 8-6157] synthesizing module 'my_pe_array' [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:3]
+	Parameter L_RAM_SIZE bound to: 6 - type: integer 
+	Parameter MEM_SIZE bound to: 13 - type: integer 
+	Parameter DONE_DELAY bound to: 5 - type: integer 
+	Parameter S_IDLE bound to: 3'b000 
+	Parameter S_PELD bound to: 3'b001 
+	Parameter S_GBLD bound to: 3'b010 
+	Parameter S_CALC bound to: 3'b011 
+	Parameter S_MOVE bound to: 3'b100 
+	Parameter S_DONE bound to: 3'b101 
+	Parameter BLOCK_LENGTH bound to: 64 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'my_pe' [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe.v:3]
+	Parameter L_RAM_SIZE bound to: 6 - type: integer 
+INFO: [Synth 8-5534] Detected attribute (* ram_style = "block" *) [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe.v:26]
+INFO: [Synth 8-638] synthesizing module 'floating_point_MAC' [d:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/ip/floating_point_MAC/synth/floating_point_MAC.vhd:74]
+	Parameter C_XDEVICEFAMILY bound to: zynq - type: string 
+	Parameter C_HAS_ADD bound to: 0 - type: integer 
+	Parameter C_HAS_SUBTRACT bound to: 0 - type: integer 
+	Parameter C_HAS_MULTIPLY bound to: 0 - type: integer 
+	Parameter C_HAS_DIVIDE bound to: 0 - type: integer 
+	Parameter C_HAS_SQRT bound to: 0 - type: integer 
+	Parameter C_HAS_COMPARE bound to: 0 - type: integer 
+	Parameter C_HAS_FIX_TO_FLT bound to: 0 - type: integer 
+	Parameter C_HAS_FLT_TO_FIX bound to: 0 - type: integer 
+	Parameter C_HAS_FLT_TO_FLT bound to: 0 - type: integer 
+	Parameter C_HAS_RECIP bound to: 0 - type: integer 
+	Parameter C_HAS_RECIP_SQRT bound to: 0 - type: integer 
+	Parameter C_HAS_ABSOLUTE bound to: 0 - type: integer 
+	Parameter C_HAS_LOGARITHM bound to: 0 - type: integer 
+	Parameter C_HAS_EXPONENTIAL bound to: 0 - type: integer 
+	Parameter C_HAS_FMA bound to: 1 - type: integer 
+	Parameter C_HAS_FMS bound to: 0 - type: integer 
+	Parameter C_HAS_ACCUMULATOR_A bound to: 0 - type: integer 
+	Parameter C_HAS_ACCUMULATOR_S bound to: 0 - type: integer 
+	Parameter C_A_WIDTH bound to: 32 - type: integer 
+	Parameter C_A_FRACTION_WIDTH bound to: 24 - type: integer 
+	Parameter C_B_WIDTH bound to: 32 - type: integer 
+	Parameter C_B_FRACTION_WIDTH bound to: 24 - type: integer 
+	Parameter C_C_WIDTH bound to: 32 - type: integer 
+	Parameter C_C_FRACTION_WIDTH bound to: 24 - type: integer 
+	Parameter C_RESULT_WIDTH bound to: 32 - type: integer 
+	Parameter C_RESULT_FRACTION_WIDTH bound to: 24 - type: integer 
+	Parameter C_COMPARE_OPERATION bound to: 8 - type: integer 
+	Parameter C_LATENCY bound to: 16 - type: integer 
+	Parameter C_OPTIMIZATION bound to: 1 - type: integer 
+	Parameter C_MULT_USAGE bound to: 1 - type: integer 
+	Parameter C_BRAM_USAGE bound to: 0 - type: integer 
+	Parameter C_RATE bound to: 1 - type: integer 
+	Parameter C_ACCUM_INPUT_MSB bound to: 32 - type: integer 
+	Parameter C_ACCUM_MSB bound to: 32 - type: integer 
+	Parameter C_ACCUM_LSB bound to: -31 - type: integer 
+	Parameter C_HAS_UNDERFLOW bound to: 0 - type: integer 
+	Parameter C_HAS_OVERFLOW bound to: 0 - type: integer 
+	Parameter C_HAS_INVALID_OP bound to: 0 - type: integer 
+	Parameter C_HAS_DIVIDE_BY_ZERO bound to: 0 - type: integer 
+	Parameter C_HAS_ACCUM_OVERFLOW bound to: 0 - type: integer 
+	Parameter C_HAS_ACCUM_INPUT_OVERFLOW bound to: 0 - type: integer 
+	Parameter C_HAS_ACLKEN bound to: 0 - type: integer 
+	Parameter C_HAS_ARESETN bound to: 1 - type: integer 
+	Parameter C_THROTTLE_SCHEME bound to: 3 - type: integer 
+	Parameter C_HAS_A_TUSER bound to: 0 - type: integer 
+	Parameter C_HAS_A_TLAST bound to: 0 - type: integer 
+	Parameter C_HAS_B bound to: 1 - type: integer 
+	Parameter C_HAS_B_TUSER bound to: 0 - type: integer 
+	Parameter C_HAS_B_TLAST bound to: 0 - type: integer 
+	Parameter C_HAS_C bound to: 1 - type: integer 
+	Parameter C_HAS_C_TUSER bound to: 0 - type: integer 
+	Parameter C_HAS_C_TLAST bound to: 0 - type: integer 
+	Parameter C_HAS_OPERATION bound to: 0 - type: integer 
+	Parameter C_HAS_OPERATION_TUSER bound to: 0 - type: integer 
+	Parameter C_HAS_OPERATION_TLAST bound to: 0 - type: integer 
+	Parameter C_HAS_RESULT_TUSER bound to: 0 - type: integer 
+	Parameter C_HAS_RESULT_TLAST bound to: 0 - type: integer 
+	Parameter C_TLAST_RESOLUTION bound to: 0 - type: integer 
+	Parameter C_A_TDATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_A_TUSER_WIDTH bound to: 1 - type: integer 
+	Parameter C_B_TDATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_B_TUSER_WIDTH bound to: 1 - type: integer 
+	Parameter C_C_TDATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_C_TUSER_WIDTH bound to: 1 - type: integer 
+	Parameter C_OPERATION_TDATA_WIDTH bound to: 8 - type: integer 
+	Parameter C_OPERATION_TUSER_WIDTH bound to: 1 - type: integer 
+	Parameter C_RESULT_TDATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_RESULT_TUSER_WIDTH bound to: 1 - type: integer 
+	Parameter C_FIXED_DATA_UNSIGNED bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'floating_point_v7_1_7' declared at 'd:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/ip/floating_point_MAC/hdl/floating_point_v7_1_vh_rfs.vhd:91615' bound to instance 'U0' of component 'floating_point_v7_1_7' [d:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/ip/floating_point_MAC/synth/floating_point_MAC.vhd:208]
+INFO: [Synth 8-256] done synthesizing module 'floating_point_MAC' (35#1) [d:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/ip/floating_point_MAC/synth/floating_point_MAC.vhd:74]
+INFO: [Synth 8-6155] done synthesizing module 'my_pe' (36#1) [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe.v:3]
+WARNING: [Synth 8-5856] 3D RAM global_buffer_reg  for this pattern/configuration is not supported. This will most likely be implemented in registers
+WARNING: [Synth 8-3848] Net dout_reg[0][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[1][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[2][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[3][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[4][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[5][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[6][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[7][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[8][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[9][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[10][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[11][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[12][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[13][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[14][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[15][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[16][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[17][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[18][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[19][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[20][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[21][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[22][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[23][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[24][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[25][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[26][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[27][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[28][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[29][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[30][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[31][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[32][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[33][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[34][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[35][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[36][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[37][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[38][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[39][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[40][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[41][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[42][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[43][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[44][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[45][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[46][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[47][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[48][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[49][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[50][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[51][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[52][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[53][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[54][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[55][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[56][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[57][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[58][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[59][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[60][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[61][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[62][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[63][0] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[0][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[1][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[2][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[3][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[4][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[5][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[6][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[7][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[8][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[9][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[10][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[11][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[12][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[13][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[14][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[15][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[16][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[17][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[18][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[19][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[20][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[21][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[22][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[23][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[24][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[25][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[26][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[27][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[28][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[29][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[30][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[31][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[32][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[33][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[34][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+WARNING: [Synth 8-3848] Net dout_reg[35][1] in module/entity my_pe_array does not have driver. [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:31]
+INFO: [Common 17-14] Message 'Synth 8-3848' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-6155] done synthesizing module 'my_pe_array' (37#1) [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/my_pe_array.v:3]
+WARNING: [Synth 8-85] always block has no event control specified [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/tb_pe_array.v:30]
+INFO: [Synth 8-6155] done synthesizing module 'tb_pe_array' (38#1) [D:/HSD_SNU_2021/labs/project_v0_mid/project_v0_mid.srcs/sources_1/new/tb_pe_array.v:3]
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized23 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized23 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized23 has unconnected port SINIT
+WARNING: [Synth 8-3331] design flt_dec_op has unconnected port DEC_OP_STATE[11]
+WARNING: [Synth 8-3331] design flt_dec_op has unconnected port DEC_OP_STATE[10]
+WARNING: [Synth 8-3331] design flt_dec_op has unconnected port DEC_OP_STATE[9]
+WARNING: [Synth 8-3331] design flt_dec_op has unconnected port DEC_OP_STATE[8]
+WARNING: [Synth 8-3331] design flt_dec_op has unconnected port DIVIDE_BY_ZERO_IN
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized111 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized111 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized111 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized97 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized97 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized97 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized5 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized5 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized5 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized113 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized113 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized113 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized71 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized71 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized71 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized119 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized119 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized119 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized123 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized123 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized123 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized123 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized123 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized121 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized121 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized121 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized121 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized121 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized1 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized1 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized1 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized1 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized1 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized31 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized31 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized31 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized31 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized31 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized117 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized117 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized117 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized117 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized117 has unconnected port SINIT
+WARNING: [Synth 8-3331] design carry_chain__parameterized14 has unconnected port CARRYS_OUT[6]
+WARNING: [Synth 8-3331] design carry_chain__parameterized14 has unconnected port CARRYS_OUT[5]
+WARNING: [Synth 8-3331] design carry_chain__parameterized14 has unconnected port CARRYS_OUT[4]
+WARNING: [Synth 8-3331] design carry_chain__parameterized14 has unconnected port CARRYS_OUT[3]
+WARNING: [Synth 8-3331] design carry_chain__parameterized14 has unconnected port CARRYS_OUT[2]
+WARNING: [Synth 8-3331] design carry_chain__parameterized14 has unconnected port CARRYS_OUT[1]
+WARNING: [Synth 8-3331] design carry_chain__parameterized14 has unconnected port CARRYS_OUT[0]
+WARNING: [Synth 8-3331] design compare_eq_im__parameterized1 has unconnected port CARRYS_OUT[0]
+WARNING: [Synth 8-3331] design special_detect__parameterized0 has unconnected port A[56]
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized109 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized109 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized109 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized99 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized99 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized99 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized107 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized107 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized107 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized107 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized107 has unconnected port SINIT
+WARNING: [Synth 8-3331] design carry_chain__parameterized13 has unconnected port B[9]
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized93 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized93 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized93 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized115 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized115 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized115 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized115 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized115 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized41 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized41 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized41 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized105 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized105 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized105 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized103 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized103 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized103 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized101 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized101 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized101 has unconnected port SINIT
+WARNING: [Synth 8-3331] design carry_chain__parameterized12 has unconnected port B[9]
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized11 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized11 has unconnected port SSET
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized11 has unconnected port SINIT
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized95 has unconnected port CLK
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized95 has unconnected port CE
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized95 has unconnected port SCLR
+WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized95 has unconnected port SSET
+INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:01:38 ; elapsed = 00:01:40 . Memory (MB): peak = 1119.301 ; gain = 830.820
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:02:00 ; elapsed = 00:02:02 . Memory (MB): peak = 1119.301 ; gain = 830.820
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:02:00 ; elapsed = 00:02:02 . Memory (MB): peak = 1119.301 ; gain = 830.820
+---------------------------------------------------------------------------------
+INFO: [Common 17-83] Releasing license: Synthesis
+15 Infos, 202 Warnings, 0 Critical Warnings and 1 Errors encountered.
+synth_design failed
+The application has run out of memory
+    while executing
+"synth_design -top tb_pe_array -part xc7z020clg484-1"
+    (file "tb_pe_array.tcl" line 54)
+INFO: [Common 17-206] Exiting Vivado at Tue Mar 23 19:09:23 2021...
