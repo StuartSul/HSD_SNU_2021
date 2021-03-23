@@ -85,9 +85,17 @@ void FPGA::largeMV(const float *large_mat, const float *input, float *output, in
 
       // 1) Assign a vector
       // IMPLEMENT THIS
+			memcpy(vec, input + j, sizeof(float) * block_col);
+			memset(vec + block_col, 0, sizeof(float) * (v_size_ - block_col));
 
       // 2) Assign a matrix
       // IMPLEMENT THIS
+			for(int row = 0; row < block_row; ++row)
+			{
+				memcpy(mat + row * v_size_, large_mat + (row + i) * 
+							num_input + j, sizeof(float) * block_col);
+				memset(mat + row * v_size_ + block_col, 0, sizeof(float) * (v_size_ - block_col));
+			}
 
       // 3) Call a function `blockMV() to execute MV multiplication
       const float *ret = this->blockMV();
@@ -108,10 +116,10 @@ void FPGA::convLowering(const std::vector<std::vector<std::vector<std::vector<fl
    * Arguments:
    *
    * conv_weights: [conv_channel, input_channel, conv_height, conv_width]
-   * new_weights: [?, ?]
+   * new_weights: [?, ?] => [conv_channel, input_channel * conv_height * conv_width]
    * inputs: [input_channel, input_height, input_width]
-   * new_inputs: [?, ?]
-   *
+   * new_inputs: [?, ?] => [input_channel * conv_height * conv_width,
+   *              (input_height - conv_height + 1) * (input_width - conv_width + 1)]
    */
 
   int conv_channel = cnn_weights.size();
@@ -123,7 +131,26 @@ void FPGA::convLowering(const std::vector<std::vector<std::vector<std::vector<fl
   int input_width = inputs[0][0].size();
 
   // IMPLEMENT THIS
-  // For example,
-  // new_weights[0][0] = cnn_weights[0][0][0][0];
-  // new_inputs[0][0] = inputs[0][0][0];
+  for (int i = 0; i < conv_channel; i++) {
+    for (int j = 0; j < input_channel; j++) {
+      for (int k = 0; k < conv_height; k++) {
+        for (int l = 0; l < conv_width; l++) {
+          new_weights[i][j * conv_height * conv_width +
+            k * conv_width + l] = cnn_weights[i][j][k][l];
+        }
+      }
+    }
+  }
+  for (int i = 0; i < input_channel; i++) {
+    for (int j = 0; j < input_height - conv_height + 1; j++) {
+      for (int k = 0; k < input_width - conv_width + 1; k++) {
+        for (int l = 0; l < conv_height; l++) {
+          for (int m = 0; m < conv_width; m++) {
+            new_inputs[i * conv_height * conv_width + l * conv_width + m][j * (input_height - conv_height + 1) + k] = 
+              inputs[i][j + l][k + m];
+          }
+        }
+      }
+    }
+  }
 }
