@@ -3,6 +3,7 @@
 .cache
 .vscode-server
 .wget-hsts
+.DS_STORE
 
 # Python
 *.pyc
