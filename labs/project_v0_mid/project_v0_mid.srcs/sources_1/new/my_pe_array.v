@@ -2,173 +2,89 @@
 
 module my_pe_array #(
     parameter L_RAM_SIZE = 6,
-    parameter MEM_SIZE = 13,
-    parameter DONE_DELAY = 5
+    parameter BRAM_SIZE = 15,
+    parameter BLOCK_SIZE = 16
 )(
-    input wire start,
-    input wire reset,
-    input wire clk,
-    output wire [MEM_SIZE-1:0] rdaddr,
-    input wire [31:0] rddata,
-    output wire [31:0] wrdata,
-    output reg done = 1'b0
+    input start,
+    input aresetn,
+    input aclk,
+    input [31:0] rddata,
+    output [BRAM_SIZE-1:0] rdaddr,
+    output [31:0] wrdata,
+    output done
 );
     
-    localparam S_IDLE = 3'd0;
-    localparam S_PELD = 3'd1;
-    localparam S_GBLD = 3'd2;
-    localparam S_CALC = 3'd3;
-    localparam S_MOVE = 3'd4;
-    localparam S_DONE = 3'd5;
+    wire [BLOCK_SIZE**2-1:0] dvalid;
+    wire [31:0] dout [0:BLOCK_SIZE**2-1];
+    reg [31:0] wrdata_reg [0:BLOCK_SIZE**2-1];
+    reg valid;
+    reg [1:0] present_state, next_state;
+    reg [31:0] gb [0:BLOCK_SIZE*2-1]; // global buffer
+    reg [L_RAM_SIZE-1:0] cnt, cnt_MAC; // counters
     
-    localparam BLOCK_LENGTH = 2**L_RAM_SIZE;
+    // states
+    localparam S_IDLE = 2'd0, S_LOAD = 2'd1,
+               S_CALC = 2'd2, S_DONE = 2'd3;
     
-    wire dvalid [0:BLOCK_LENGTH-1][0:BLOCK_LENGTH-1];
-    wire [31:0] dout [0:BLOCK_LENGTH-1][0:BLOCK_LENGTH-1];
+    // output assignment
+    assign rdaddr = (present_state == S_LOAD) ? cnt + cnt_MAC * BLOCK_SIZE * 2 : 0; // TODO: fix this to fit actual BRAM address
+    assign wrdata = (present_state == S_DONE) ? wrdata_reg[cnt] : 0; // TODO: fix this to fit actual BRAM address
+    assign done = present_state == S_DONE;
     
-    reg we [0:BLOCK_LENGTH-1];
-    reg valid = 0;
-    reg [31:0] dout_reg [0:BLOCK_LENGTH-1][0:BLOCK_LENGTH-1];
-    
-    reg [2:0] state = S_IDLE;
-    reg [31:0] global_buffer [0:BLOCK_LENGTH-1][0:BLOCK_LENGTH-1];
-    reg [L_RAM_SIZE-1:0] row_counter = 'd0;
-    reg [L_RAM_SIZE-1:0] col_counter = 'd0;
-    
-    genvar i, j;
-    integer k, l;
-    for (i = 0; i < BLOCK_LENGTH; i = i + 1) begin:PE_ROW
-        for (j = 0; j < BLOCK_LENGTH; j = j + 1) begin:PE_COL
+    // PE array
+    genvar row, col;
+    for (row = 0; row < BLOCK_SIZE; row = row + 1) begin:PE_ROW
+        for (col = 0; col < BLOCK_SIZE; col = col + 1) begin:PE_COL
             my_pe PE(
-                .aclk(clk),
-                .aresetn(~reset),
-                .ain(global_buffer[i][col_counter]),
-                .din(rddata),
-                .addr(row_counter),
-                .we(we[j]),
+                .aclk(aclk),
+                .aresetn(aresetn),
+                .ain(gb[row]),
+                .bin(gb[col + BLOCK_SIZE]),
                 .valid(valid),
-                .dvalid(dvalid[i][j]),
-                .dout(dout[i][j])
+                .dvalid(dvalid[row * BLOCK_SIZE + col]),
+                .dout(dout[row * BLOCK_SIZE + col])
             );
-            defparam PE.L_RAM_SIZE = L_RAM_SIZE;
         end
     end
-
-    assign rdaddr = row_counter * BLOCK_LENGTH + col_counter;
-    assign wrdata = (state == S_MOVE) ? dout_reg[row_counter][col_counter] : 'd0;
-
-    // FSM
-    always @(posedge clk) begin
-        case (state)
-        
-            S_IDLE:
-                begin
-                    if (start) begin
-                        state <= S_PELD;
-                        row_counter <= 'd0;
-                        col_counter <= 'd0;
-                        we[0] <= 1'b1;
-                    end else begin
-                        state <= S_IDLE;
-                    end
-                end
-                
-            S_PELD:
-                begin
-                    if (row_counter < BLOCK_LENGTH - 1) begin
-                        row_counter <= row_counter + 'd1;
-                    end else begin
-                        we[col_counter] <= 1'b0;
-                        if (col_counter < BLOCK_LENGTH - 1) begin
-                            we[col_counter + 1] <= 1'b1;
-                            row_counter <= 'd0;
-                            col_counter <= col_counter + 'd1;
-                        end else begin
-                            state <= S_GBLD;
-                            row_counter <= 'd0;
-                            col_counter <= 'd0;
-                        end
-                    end
-                end
-                
-            S_GBLD:
-                begin
-                    if (col_counter < BLOCK_LENGTH - 1) begin
-                        global_buffer[row_counter][col_counter] <= rddata;
-                        col_counter <= col_counter + 'd1;
-                    end else begin
-                        global_buffer[row_counter][col_counter] <= rddata;
-                        if (row_counter < BLOCK_LENGTH - 1) begin
-                            row_counter <= row_counter + 'd1;
-                            col_counter <= 'd0;
-                        end else begin
-                            state <= S_GBLD;
-                            row_counter <= 'd0;
-                            col_counter <= 'd0;
-                            valid <= 1'b1;
-                        end
-                    end
-                end
-                
-            S_CALC:
-                begin
-                    if (valid) begin
-                        valid <= 1'b0;
-                    end else if (dvalid[0][0]) begin
-                        if (row_counter < BLOCK_LENGTH) begin
-                            row_counter <= row_counter + 'd1;
-                            col_counter <= col_counter + 'd1;
-                            valid <= 1'b1;
-                        end else begin
-                            state <= S_MOVE;
-                            row_counter <= 'd0;
-                            col_counter <= 'd0;
-                            valid <= 1'b0;
-                            for (k = 0; k < BLOCK_LENGTH; k = k + 1) begin
-                                for (l = 0; l < BLOCK_LENGTH; l = l + 1) begin
-                                    dout_reg[k][l] <= dout[k][l];
-                                end
-                            end
-                        end
-                    end else begin
-                        row_counter <= row_counter;
-                        col_counter <= col_counter;
-                        valid <= valid;
-                    end
-                end
-                
-            S_MOVE:
-                begin
-                    if (col_counter < BLOCK_LENGTH - 1) begin
-                        col_counter <= col_counter + 'd1;
-                    end else begin
-                        if (row_counter < BLOCK_LENGTH - 1) begin
-                            row_counter <= row_counter + 'd1;
-                            col_counter <= 'd0;
-                        end else begin
-                            state <= S_DONE;
-                            row_counter <= 'd0;
-                            col_counter <= 'd0;
-                            valid <= 1'b1;
-                            done <= 1'b1;
-                        end
-                    end
-                end
-                
-            S_DONE:
-                begin
-                    if (row_counter < DONE_DELAY - 1) begin
-                        row_counter <= row_counter + 'd1;
-                    end else begin
-                        state <= S_IDLE;
-                        row_counter <= 'd0;
-                        done <= 1'b0;
-                    end
-                end
-                
-            default:
-                state <= S_IDLE;
-        endcase
+    
+    // counters
+    always @(posedge aclk) begin
+        cnt <= (present_state[0]) ? cnt + 1 : 0; // S_LOAD or S_DONE
+        cnt_MAC <= (present_state[0] + present_state[1] == 1) ? cnt_MAC + |dvalid : 0; // S_LOAD or S_CALC
     end
+    
+    // valid signal
+    always @(posedge aclk)
+        valid <= (next_state == S_CALC && present_state == S_LOAD) ? 1 : 0;
+     
+     // wrdata
+    for (row = 0; row < BLOCK_SIZE; row = row + 1) begin
+        for (col = 0; col < BLOCK_SIZE; col = col + 1) begin
+             always @(posedge aclk)
+                if (cnt_MAC == BLOCK_SIZE - 1 && dvalid)
+                    wrdata_reg[row * BLOCK_SIZE + col] <= dout[row * BLOCK_SIZE + col];
+                else if (next_state == S_DONE)
+                    wrdata_reg[row * BLOCK_SIZE + col] <= wrdata_reg[row * BLOCK_SIZE + col];
+                else
+                    wrdata_reg[row * BLOCK_SIZE + col] <= 0;
+        end
+    end
+    
+    // global buffer
+    always @(posedge aclk)
+        gb[cnt] <= (present_state == S_LOAD) ? rddata : gb[cnt];
+    
+    // present_state
+    always @(posedge aclk)
+        present_state <= (aresetn) ? next_state : S_IDLE;
+    
+    // combinational logic for determining next_state
+    always @(*)
+        case (present_state)
+            S_IDLE: next_state <= (start) ? S_LOAD : S_IDLE;
+            S_LOAD: next_state <= (cnt == BLOCK_SIZE * 2 - 1) ? S_CALC : S_LOAD;
+            S_CALC: next_state <= (dvalid) ? ((cnt_MAC == BLOCK_SIZE - 1) ? S_DONE : S_LOAD) : S_CALC;
+            S_DONE: next_state <= (cnt == BLOCK_SIZE**2-1) ? S_IDLE : S_DONE;
+        endcase
     
 endmodule
