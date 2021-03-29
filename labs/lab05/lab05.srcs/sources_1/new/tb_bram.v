@@ -8,7 +8,9 @@ module tb_bram();
     wire [31:0] BRAM1_RDDATA;
     wire [31:0] BRAM2_RDDATA; // unused
 
-    my_bram BRAM1(
+    my_bram #(
+        .OUT_FILE("")
+    ) BRAM1(
         .BRAM_ADDR(BRAM1_ADDR),
         .BRAM_CLK(clk),
         .BRAM_WRDATA(32'd0),
@@ -19,7 +21,9 @@ module tb_bram();
         .done(done)
     );
     
-    my_bram BRAM2(
+    my_bram #(
+        .INIT_FILE("")
+    ) BRAM2(
         .BRAM_ADDR(BRAM2_ADDR),
         .BRAM_CLK(clk),
         .BRAM_WRDATA(BRAM1_RDDATA),
@@ -30,28 +34,23 @@ module tb_bram();
         .done(done)
     );
     
-    defparam BRAM1.INIT_FILE = "input1.txt";
-    defparam BRAM2.INIT_FILE = "input2.txt";
-    defparam BRAM1.OUT_FILE = "output1.txt";
-    defparam BRAM2.OUT_FILE = "output2.txt";
-    
-    initial begin
+    initial begin // BRAM 1
         clk <= 0; rst <= 0; en <= 1; done <= 0;
         BRAM1_ADDR <= 14'd0;
-        BRAM2_ADDR <= 14'd0;
-        BRAM2_WE <= 4'd0;
         repeat(8192-1) begin
             #10;
-            BRAM1_ADDR <= BRAM1_ADDR + 14'b100;
+            BRAM1_ADDR <= BRAM1_ADDR + 15'b100;
         end
     end
     
-    initial begin
+    initial begin // BRAM 2
+        BRAM2_ADDR <= 14'd0;
+        BRAM2_WE <= 4'd0;
         #20
         BRAM2_WE <= 4'hf;
         repeat(8192-1) begin
             #10;
-            BRAM2_ADDR <= BRAM2_ADDR + 14'b100;
+            BRAM2_ADDR <= BRAM2_ADDR + 15'b100;
         end
         #10; done <= 1; #5; $finish;
     end

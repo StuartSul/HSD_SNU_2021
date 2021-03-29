@@ -21,13 +21,11 @@ module my_bram #(
 
     // code for initial read & final write
     initial begin
-        // read data from INIT_FILE and store them into mem
-        if (INIT_FILE != "") begin
+        if (INIT_FILE != "")
             $readmemh(INIT_FILE, mem);
-        end
         wait(done)
-            // write data stored in mem into OUT_FILE
-            $writememh(OUT_FILE, mem);
+            if (OUT_FILE != "")
+                $writememh(OUT_FILE, mem);
     end
     
     // code for BRAM functioning
@@ -42,11 +40,12 @@ module my_bram #(
             if (BRAM_WE[3])
                 mem[addr][31:24] <= BRAM_WRDATA[31:24];
             if (!BRAM_WE)
-                BRAM_RDDATA <= dout;
-            dout <= mem[addr];
+                dout <= mem[addr];
         end
         if (BRAM_RST)
-            BRAM_RDDATA <= 'd0;
+            BRAM_RDDATA <= 32'd0;
+        else if (BRAM_EN)
+            BRAM_RDDATA <= dout;
     end
     
 endmodule
