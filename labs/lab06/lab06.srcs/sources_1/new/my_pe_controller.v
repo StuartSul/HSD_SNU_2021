@@ -24,14 +24,15 @@ module my_pe_controller #(
     localparam S_IDLE = 2'd0, S_LOAD = 2'd1,
                S_CALC = 2'd2, S_DONE = 2'd3;
     
-    // output assignment
+    // output assignmentsss
     assign rdaddr = cnt;
     assign done = (present_state == S_DONE);
     
     // processing element
     my_pe PE(
         .aclk(clk),
-        .aresetn(~reset),
+        .aresetn(~(reset | (present_state == S_IDLE || 
+                            present_state == S_DONE))),
         .ain(gb[cnt_MAC]),
         .bin(gb[cnt_MAC + 16]),
         .valid(valid),
