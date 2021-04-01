@@ -1,23 +1,23 @@
 `timescale 1ns / 1ps
 
 module my_pe_controller #(
-    parameter L_RAM_SIZE = 6,
-    parameter MEM_SIZE = 6
+    parameter L_RAM_SIZE = 6, // global buffer size
+    parameter MEM_SIZE = 5 // external memory size
 )(
-        input start,
-        input aresetn,
-        input aclk,
-        input [31:0] rddata,
-        output [MEM_SIZE-1:0] rdaddr,
-        output reg [31:0] wrdata,
-        output done
-    );
+    input start, // start signal
+    input reset, // active-high reset signal
+    input clk,   // clock signal
+    input [31:0] rddata, // data from memory
+    output [MEM_SIZE-1:0] rdaddr, // memory address to read data from
+    output reg [31:0] out, // inner product
+    output done // done signal
+);
     
-    wire dvalid;
-    wire [31:0] dout;
-    reg valid;
-    reg [1:0] present_state, next_state;
-    reg [31:0] gb [0:31]; // global buffer
+    wire dvalid; // dvalid from PE
+    wire [31:0] dout; // dout from PE
+    reg valid; // valid signal input to PE
+    reg [1:0] present_state, next_state; // state registers
+    reg [31:0] gb [0:2**L_RAM_SIZE-1]; // global buffer
     reg [L_RAM_SIZE-1:0] cnt, cnt_MAC; // counters
     
     // states
@@ -26,12 +26,12 @@ module my_pe_controller #(
     
     // output assignment
     assign rdaddr = cnt;
-    assign done = present_state == S_DONE;
+    assign done = (present_state == S_DONE);
     
     // processing element
     my_pe PE(
-        .aclk(aclk),
-        .aresetn(aresetn),
+        .aclk(clk),
+        .aresetn(~reset),
         .ain(gb[cnt_MAC]),
         .bin(gb[cnt_MAC + 16]),
         .valid(valid),
@@ -40,13 +40,13 @@ module my_pe_controller #(
     );
     
     // counters
-    always @(posedge aclk) begin
+    always @(posedge clk) begin
         cnt <= (present_state[0]) ? cnt + 1 : 0; // S_LOAD or S_DONE
         cnt_MAC <= (present_state == S_CALC) ? cnt_MAC + dvalid : 0;
     end
     
     // valid signal
-    always @(posedge aclk)
+    always @(posedge clk)
         if (cnt_MAC == 15)
             valid <= 0;
         else if (present_state == S_CALC)
@@ -56,24 +56,24 @@ module my_pe_controller #(
         else
             valid <= 0;
      
-     // wrdata
-     always @(posedge aclk)
+     // output
+     always @(posedge clk)
         if (cnt_MAC == 15 && dvalid)
-            wrdata <= dout;
+            out <= dout;
         else if (next_state == S_DONE)
-            wrdata <= wrdata;
+            out <= out;
         else
-            wrdata <= 0;
+            out <= 0;
     
     // global buffer
-    always @(posedge aclk)
+    always @(posedge clk)
         gb[cnt] <= (present_state == S_LOAD) ? rddata : gb[cnt];
     
     // present_state
-    always @(posedge aclk)
-        present_state <= (aresetn) ? next_state : S_IDLE;
+    always @(posedge clk)
+        present_state <= (reset) ? S_IDLE : next_state;
     
-    // combinational logic for determining next_state
+    // combinational logic for next_state
     always @(*)
         case (present_state)
             S_IDLE: next_state <= (start) ? S_LOAD : S_IDLE;

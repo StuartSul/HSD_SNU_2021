@@ -4,17 +4,17 @@ module tb_pe_controller();
 
     reg start, rst, clk;
     reg [31:0] mem [0:31];
-    wire [5:0] rdaddr;
-    wire [31:0] wrdata;
+    wire [4:0] rdaddr;
+    wire [31:0] out;
     wire done;
     
     my_pe_controller PE_CONTROLLER(
         .start(start),
-        .aresetn(~rst),
-        .aclk(clk),
+        .reset(rst),
+        .clk(clk),
         .rddata(mem[rdaddr]),
         .rdaddr(rdaddr),
-        .wrdata(wrdata),
+        .out(out),
         .done(done)
     );
     
