@@ -24,7 +24,7 @@ module my_pe_controller #(
     localparam S_IDLE = 2'd0, S_LOAD = 2'd1,
                S_CALC = 2'd2, S_DONE = 2'd3;
     
-    // output assignmentsss
+    // output assignments
     assign rdaddr = cnt;
     assign done = (present_state == S_DONE);
     
