@@ -2,45 +2,49 @@
 
 module tb_pe_array();
 
-    reg start, rst, clk;
-    reg [31:0] mem [0:16*16*2-1];
-    wire [14:0] rdaddr;
-    wire [31:0] wrdata;
+    reg start;
     wire done;
+    reg S_AXI_ARESETN;
+    reg S_AXI_ACLK;
+    wire [31:0] BRAM_ADDR;
+    wire [31:0] BRAM_RDDATA;
+    wire [31:0] BRAM_WRDATA;
+    wire [3:0] BRAM_WE;
+    wire BRAM_CLK;
     
     my_pe_array PE_ARRAY(
         .start(start),
-        .aresetn(~rst),
-        .aclk(clk),
-        .rddata(mem[rdaddr]),
-        .rdaddr(rdaddr),
-        .wrdata(wrdata),
+        .done(done),
+        .S_AXI_ACLK(S_AXI_ACLK),
+        .S_AXI_ARESETN(S_AXI_ARESETN),
+        .BRAM_ADDR(BRAM_ADDR),
+        .BRAM_RDDATA(BRAM_RDDATA),
+        .BRAM_WRDATA(BRAM_WRDATA),
+        .BRAM_WE(BRAM_WE),
+        .BRAM_CLK(BRAM_CLK)
+    );
+    
+    my_bram #(
+        .BRAM_ADDR_WIDTH(32)
+    ) BRAM (
+        .BRAM_ADDR(BRAM_ADDR),
+        .BRAM_CLK(BRAM_CLK),
+        .BRAM_WRDATA(BRAM_WRDATA),
+        .BRAM_RDDATA(BRAM_RDDATA),
+        .BRAM_EN(1'b1),
+        .BRAM_RST(~S_AXI_ARESETN),
+        .BRAM_WE(BRAM_WE),
         .done(done)
     );
     
     initial begin
-        // assign values to mem (0.0~15.0 for mem[0]~mem[15] and 1.0~16.0 for mem[16]~mem[31])
-        /*
-           0 8 1  9     4  5  6  7    218 236 254 272
-          1  9 2 10    12 13 14 15    252 274 296 318
-          2 10 3 11     5  6  7  8    286 312 338 364
-          3 11 4 12    13 14 15 16    320 350 380 410
-        */
-        mem[0] = 32'h00000000; mem[1] = 32'h3f800000; mem[2] = 32'h40000000; mem[3] = 32'h40400000; 
-        mem[4] = 32'h40800000; mem[5] = 32'h40a00000; mem[6] = 32'h40c00000; mem[7] = 32'h40e00000;
-        mem[8] = 32'h41000000; mem[9] = 32'h41100000; mem[10] = 32'h41200000; mem[11] = 32'h41300000;
-        mem[12] = 32'h41400000; mem[13] = 32'h41500000; mem[14] = 32'h41600000; mem[15] = 32'h41700000;
-        mem[16] = 32'h3f800000; mem[17] = 32'h40000000; mem[18] = 32'h40400000; mem[19] = 32'h40800000; 
-        mem[20] = 32'h40a00000; mem[21] = 32'h40c00000; mem[22] = 32'h40e00000; mem[23] = 32'h41000000; 
-        mem[24] = 32'h41100000; mem[25] = 32'h41200000; mem[26] = 32'h41300000; mem[27] = 32'h41400000; 
-        mem[28] = 32'h41500000; mem[29] = 32'h41600000; mem[30] = 32'h41700000; mem[31] = 32'h41800000;
-        
-        // start simulation
-        clk <= 0;
-        rst <= 1; #20; rst <= 0;
+        S_AXI_ACLK <= 0;
+        S_AXI_ARESETN <= 0; 
+        #20; 
+        S_AXI_ARESETN <= 1;
         start <= 1;
     end
     
-    always #5 clk = ~clk;
+    always #5 S_AXI_ACLK = ~S_AXI_ACLK;
 
 endmodule

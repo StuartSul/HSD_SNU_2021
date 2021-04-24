@@ -1,8 +1,6 @@
 `timescale 1ns / 1ps
 
-module my_pe #(
-    parameter L_RAM_SIZE = 6
-) (
+module my_pe (
     input aclk, // clk
     input aresetn, // reset (low)
     input [31:0] ain, // port A
