@@ -65,7 +65,7 @@ module my_pe_array #(
     
     // counters
     always @(posedge S_AXI_ACLK) begin
-        cnt_LOAD <= (present_state == S_LOAD) ? cnt_LOAD + 1 : 0;
+        cnt_LOAD <= (next_state == S_LOAD) ? cnt_LOAD + 1 : 0;
         cnt_CALC <= (present_state == S_CALC) ? cnt_CALC + 1 :
             ((present_state == S_LOAD || present_state == S_WAIT) ? cnt_CALC : 0);
         cnt_TRAN <= (present_state == S_TRAN) ? cnt_TRAN + 1 : 0;
