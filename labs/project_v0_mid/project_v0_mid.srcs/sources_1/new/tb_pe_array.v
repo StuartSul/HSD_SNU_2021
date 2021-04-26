@@ -38,8 +38,9 @@ module tb_pe_array();
     );
     
     initial begin
+        start <= 0;
         S_AXI_ACLK <= 0;
-        S_AXI_ARESETN <= 0; 
+        S_AXI_ARESETN <= 0;
         #20; 
         S_AXI_ARESETN <= 1;
         start <= 1;

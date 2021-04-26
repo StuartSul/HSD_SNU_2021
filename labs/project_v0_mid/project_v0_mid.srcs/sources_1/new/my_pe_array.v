@@ -43,7 +43,7 @@ module my_pe_array #(
     assign BRAM_ADDR = {bram_addr, 2'd0};
     assign BRAM_WRDATA = (present_state == S_TRAN) ? dout_r[cnt_TRAN] : 0;
     assign BRAM_WE = {4{(present_state == S_TRAN)}};
-    assign BRAM_CLK = S_AXI_ACLK;
+    assign BRAM_CLK = ~S_AXI_ACLK; // 180 degrees phase-shifted
     
     // PE array
     genvar row, col;
@@ -65,7 +65,7 @@ module my_pe_array #(
     
     // counters
     always @(posedge S_AXI_ACLK) begin
-        cnt_LOAD <= (next_state == S_LOAD) ? cnt_LOAD + 1 : 0;
+        cnt_LOAD <= (present_state == S_LOAD) ? cnt_LOAD + 1 : 0;
         cnt_CALC <= (present_state == S_CALC) ? cnt_CALC + 1 :
             ((present_state == S_LOAD || present_state == S_WAIT) ? cnt_CALC : 0);
         cnt_TRAN <= (present_state == S_TRAN) ? cnt_TRAN + 1 : 0;
@@ -74,8 +74,8 @@ module my_pe_array #(
     
     // global buffer
     always @(posedge S_AXI_ACLK)
-        gb[cnt_LOAD - 2] <= (present_state == S_LOAD && 
-                             cnt_LOAD >= 2) ? BRAM_RDDATA : gb[cnt_LOAD - 2];
+        gb[cnt_LOAD - 1] <= (present_state == S_LOAD && 
+                             cnt_LOAD >= 1) ? BRAM_RDDATA : gb[cnt_LOAD - 1];
     
     // dvalid
     always @(posedge S_AXI_ACLK)
@@ -107,14 +107,14 @@ module my_pe_array #(
     always @(*)
         case (present_state)
             S_IDLE: next_state <= (start) ? S_LOAD : S_IDLE;
-            S_LOAD: next_state <= (cnt_LOAD <= BLK_WIDTH * 2) ? S_LOAD : 
-                                 ((cnt_CALC == 0) ? S_CALC :
-                                 ((dvalid_r) ? S_CALC : S_WAIT));
+            S_LOAD: next_state <= (cnt_LOAD < BLK_WIDTH * 2) ? S_LOAD : 
+                                 ((cnt_CALC == 0 || dvalid_r) ? S_CALC : S_WAIT);
             S_WAIT: next_state <= (dvalid | dvalid_r) ? 
                                  ((cnt_CALC == BLK_WIDTH) ? S_TRAN : S_CALC) : S_WAIT;
             S_CALC: next_state <= (cnt_CALC == BLK_WIDTH - 1) ? S_WAIT : S_LOAD;
             S_TRAN: next_state <= (cnt_TRAN < BLK_WIDTH**2 - 1) ? S_TRAN : S_DONE;
             S_DONE: next_state <= (cnt_DONE < DONE_LENGTH - 1) ? S_DONE : S_IDLE;
+            default: next_state <= S_IDLE;
         endcase
     
     // combinational logic for bram_addr
