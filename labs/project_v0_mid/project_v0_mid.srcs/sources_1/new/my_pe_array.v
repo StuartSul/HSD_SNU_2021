@@ -45,6 +45,7 @@ module my_pe_array #(
     assign BRAM_WRDATA = (present_state == S_TRAN) ? dout_r[cnt_TRAN] : 0;
     assign BRAM_WE = {4{(present_state == S_TRAN)}};
     assign BRAM_CLK = ~S_AXI_ACLK; // 180 degrees phase-shifted
+    // clk_wiz_0 u_clk (.clk_out1(BRAM_CLK), .clk_in1(S_AXI_ACLK));
     assign cnt_LOAD_s = cnt_LOAD >> 1;
     
     // PE array
