@@ -41,9 +41,11 @@ module tb_pe_array();
         start <= 0;
         S_AXI_ACLK <= 0;
         S_AXI_ARESETN <= 0;
-        #20; 
+        #100; 
         S_AXI_ARESETN <= 1;
         start <= 1;
+        #10;
+        start <= 0;
     end
     
     always #5 S_AXI_ACLK = ~S_AXI_ACLK;
