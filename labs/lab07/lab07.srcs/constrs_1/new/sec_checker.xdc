@@ -16,3 +16,4 @@ set_property PACKAGE_PIN W22 [get_ports {LED[5]}];  # "LD5"
 set_property PACKAGE_PIN U19 [get_ports {LED[6]}];  # "LD6"
 set_property PACKAGE_PIN U14 [get_ports {LED[7]}];  # "LD7"
 set_property IOSTANDARD LVCMOS33 [get_ports -of_objects [get_iobanks 33]];
+
