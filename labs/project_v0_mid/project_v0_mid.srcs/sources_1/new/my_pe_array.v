@@ -29,7 +29,7 @@ module my_pe_array #(
     reg  [2:0] next_state;                 // next state
     reg  [31:0] gb [0:BLK_WIDTH*2-1];      // global buffer (16 entries)
     reg  [BLK_WIDTH-1:0] cnt_LOAD;         // counter for load state
-    wire [BLK_WIDTH-1:0] cnt_LOAD_s;       // cnt_LOAD shifted one bit to the right
+    reg  [BLK_WIDTH-1:0] cnt_LOAD_d;       // down counter for load state
     reg  [BLK_WIDTH-1:0] cnt_CALC;         // counter for load & calculation states
     reg  [BLK_WIDTH-1:0] cnt_TRAN;         // counter for data-transfer state
     reg  [BLK_WIDTH-1:0] cnt_DONE;         // counter for done state
@@ -46,7 +46,6 @@ module my_pe_array #(
     assign BRAM_WE = {4{(present_state == S_TRAN)}};
     assign BRAM_CLK = ~S_AXI_ACLK; // 180 degrees phase-shifted
     // clk_wiz_0 u_clk (.clk_out1(BRAM_CLK), .clk_in1(S_AXI_ACLK));
-    assign cnt_LOAD_s = cnt_LOAD >> 1;
     
     // PE array
     genvar row, col;
@@ -68,7 +67,8 @@ module my_pe_array #(
     
     // counters
     always @(posedge S_AXI_ACLK) begin
-        cnt_LOAD <= (present_state == S_LOAD) ? cnt_LOAD + 1 : 0;
+        cnt_LOAD <= (present_state == S_LOAD) ? cnt_LOAD + ~|cnt_LOAD_d : 0;
+        cnt_LOAD_d <= (present_state == S_LOAD && |cnt_LOAD_d) ? cnt_LOAD_d - 1 : 'd2;
         cnt_CALC <= (present_state == S_CALC) ? cnt_CALC + 1 :
             ((present_state == S_LOAD || present_state == S_WAIT) ? cnt_CALC : 0);
         cnt_TRAN <= (present_state == S_TRAN) ? cnt_TRAN + 1 : 0;
@@ -77,8 +77,8 @@ module my_pe_array #(
     
     // global buffer
     always @(posedge S_AXI_ACLK)
-        gb[cnt_LOAD_s] <= (present_state == S_LOAD && cnt_LOAD[0]) ? 
-            BRAM_RDDATA : gb[cnt_LOAD_s]; // save to buffer at cnt = 1, 3, 5, ...
+        gb[cnt_LOAD] <= (present_state == S_LOAD && ~|cnt_LOAD_d) ? 
+            BRAM_RDDATA : gb[cnt_LOAD]; // save to buffer when down counter = 0
     
     // dvalid
     always @(posedge S_AXI_ACLK)
@@ -110,7 +110,7 @@ module my_pe_array #(
     always @(*)
         case (present_state)
             S_IDLE: next_state <= (start) ? S_LOAD : S_IDLE;
-            S_LOAD: next_state <= (cnt_LOAD < BLK_WIDTH * 2 * 2 - 1) ? S_LOAD : 
+            S_LOAD: next_state <= (cnt_LOAD < BLK_WIDTH * 2) ? S_LOAD : 
                                  ((cnt_CALC == 0 || dvalid_r) ? S_CALC : S_WAIT);
             S_WAIT: next_state <= (dvalid | dvalid_r) ? 
                                  ((cnt_CALC == BLK_WIDTH) ? S_TRAN : S_CALC) : S_WAIT;
@@ -123,10 +123,10 @@ module my_pe_array #(
     // combinational logic for bram_addr
     always @(*) begin
         case (present_state)
-            S_LOAD: bram_addr <= (cnt_LOAD_s < BLK_WIDTH) ?
-                    cnt_CALC + cnt_LOAD_s * BLK_WIDTH : // first matrix
-                    cnt_LOAD_s - BLK_WIDTH + cnt_CALC * 
-                    BLK_WIDTH + BLK_WIDTH**2;           // second matrix
+            S_LOAD: bram_addr <= (cnt_LOAD < BLK_WIDTH) ?
+                    cnt_CALC + cnt_LOAD * BLK_WIDTH : // first matrix
+                    cnt_LOAD - BLK_WIDTH + cnt_CALC * 
+                    BLK_WIDTH + BLK_WIDTH**2;         // second matrix
             S_TRAN: bram_addr <= cnt_TRAN;
             default: bram_addr <= 0;
         endcase
