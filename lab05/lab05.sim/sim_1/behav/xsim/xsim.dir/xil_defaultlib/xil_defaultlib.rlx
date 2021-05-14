@@ -1,0 +1,11 @@
+0.6
+2018.3
+Dec  7 2018
+00:33:28
+D:/HSD_SNU_2021/labs/lab05/lab05.sim/sim_1/behav/xsim/glbl.v,1544155482,verilog,,,,glbl,,,,,,,,
+D:/HSD_SNU_2021/labs/lab05/lab05.srcs/sources_1/ip/floating_point_MAC/demo_tb/tb_floating_point_MAC.vhd,1616412438,vhdl,,,,tb_floating_point_mac,,,,,,,,
+D:/HSD_SNU_2021/labs/lab05/lab05.srcs/sources_1/ip/floating_point_MAC/sim/floating_point_MAC.vhd,1616412438,vhdl,D:/HSD_SNU_2021/labs/lab05/lab05.srcs/sources_1/ip/floating_point_MAC/demo_tb/tb_floating_point_MAC.vhd,,,floating_point_mac,,,,,,,,
+D:/HSD_SNU_2021/labs/lab05/lab05.srcs/sources_1/new/my_bram.v,1616993912,verilog,,D:/HSD_SNU_2021/labs/lab05/lab05.srcs/sources_1/new/tb_bram.v,,my_bram,,,,,,,,
+D:/HSD_SNU_2021/labs/lab05/lab05.srcs/sources_1/new/my_pe.v,1616996082,verilog,,D:/HSD_SNU_2021/labs/lab05/lab05.srcs/sources_1/new/tb_pe.v,,my_pe,,,,,,,,
+D:/HSD_SNU_2021/labs/lab05/lab05.srcs/sources_1/new/tb_bram.v,1616994956,verilog,,D:/HSD_SNU_2021/labs/lab05/lab05.srcs/sources_1/new/my_pe.v,,tb_bram,,,,,,,,
+D:/HSD_SNU_2021/labs/lab05/lab05.srcs/sources_1/new/tb_pe.v,1617005274,verilog,,,,tb_pe,,,,,,,,
