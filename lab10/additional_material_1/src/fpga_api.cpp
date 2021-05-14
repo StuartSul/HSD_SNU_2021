@@ -65,25 +65,25 @@ void FPGA::largeMM(const float* weight_mat, const float* input_mat, float* outpu
         // 1) Assign a m1
         // Implement This
         for (int m1_row = 0; m1_row < block_row; m1_row++) {
-          memcpy(m1 + m1_row * v_size_, weight_mat + (i + m1_row) *
+          memcpy(m1 + m1_row * SIZE, weight_mat + (i + m1_row) *
                 num_input + j, sizeof(float) * block_col_1);
-				  memset(m1 + m1_row * v_size_ + block_col_1, 0, 
-                sizeof(float) * (v_size_ - block_col_1));
+				  memset(m1 + m1_row * SIZE + block_col_1, 0, 
+                sizeof(float) * (SIZE - block_col_1));
         }
-        for (int m1_row = block_row; m1_row < v_size_; m1_row++) {
-          memset(m1 + m1_row * v_size_, 0, sizeof(float) * v_size_);
+        for (int m1_row = block_row; m1_row < SIZE; m1_row++) {
+          memset(m1 + m1_row * SIZE, 0, sizeof(float) * SIZE);
         }
 
         // 2) Assign a m2
         // Implement This
         for (int m2_row = 0; m2_row < block_col_1; m2_row++) {
-          memcpy(m2 + m2_row * v_size_, input_mat + (j + m2_row) *
+          memcpy(m2 + m2_row * SIZE, input_mat + (j + m2_row) *
                 num_matrix2 + k, sizeof(float) * block_col_2);
-				  memset(m2 + m2_row * v_size_ + block_col_2, 0, 
-                sizeof(float) * (v_size_ - block_col_2));
+				  memset(m2 + m2_row * SIZE + block_col_2, 0, 
+                sizeof(float) * (SIZE - block_col_2));
         }
-        for (int m2_row = block_col_1; m2_row < v_size_; m2_row++) {
-          memset(m2 + m2_row * v_size_, 0, sizeof(float) * v_size_);
+        for (int m2_row = block_col_1; m2_row < SIZE; m2_row++) {
+          memset(m2 + m2_row * SIZE, 0, sizeof(float) * SIZE);
         }
 
 
