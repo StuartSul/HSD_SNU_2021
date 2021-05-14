@@ -48,7 +48,7 @@
 
 
 // IP VLNV: user.org:user:myip:1.0
-// IP Revision: 6
+// IP Revision: 8
 
 (* X_CORE_INFO = "myip_v1_0,Vivado 2018.3" *)
 (* CHECK_LICENSE_TYPE = "design_1_myip_0_0,myip_v1_0,{}" *)
@@ -61,6 +61,8 @@ module design_1_myip_0_0 (
   m00_bram_en,
   m00_bram_rst,
   m00_bram_we,
+  s00_axi_aclk,
+  s00_axi_aresetn,
   s00_axi_awaddr,
   s00_axi_awprot,
   s00_axi_awvalid,
@@ -79,9 +81,7 @@ module design_1_myip_0_0 (
   s00_axi_rdata,
   s00_axi_rresp,
   s00_axi_rvalid,
-  s00_axi_rready,
-  s00_axi_aclk,
-  s00_axi_aresetn
+  s00_axi_rready
 );
 
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 m00_bram ADDR" *)
@@ -101,6 +101,12 @@ output wire m00_bram_rst;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME m00_bram, MEM_SIZE 8192, MEM_WIDTH 32, MEM_ECC NONE, READ_LATENCY 1" *)
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 m00_bram WE" *)
 output wire [3 : 0] m00_bram_we;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI_CLK, ASSOCIATED_BUSIF S00_AXI, ASSOCIATED_RESET s00_axi_aresetn, FREQ_HZ 100000000, PHASE 0.000, INSERT_VIP 0, XIL_INTERFACENAME s00_axi_aclk, ASSOCIATED_RESET s00_axi_aresetn, FREQ_HZ 50000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, ASSOCIATED_BUSIF S00_AXI, INSERT_VIP 0" *)
+(* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 S00_AXI_CLK CLK, xilinx.com:signal:clock:1.0 s00_axi_aclk CLK" *)
+input wire s00_axi_aclk;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI_RST, POLARITY ACTIVE_LOW, INSERT_VIP 0, XIL_INTERFACENAME s00_axi_aresetn, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
+(* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 S00_AXI_RST RST, xilinx.com:signal:reset:1.0 s00_axi_aresetn RST" *)
+input wire s00_axi_aresetn;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWADDR" *)
 input wire [3 : 0] s00_axi_awaddr;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWPROT" *)
@@ -141,19 +147,13 @@ output wire s00_axi_rvalid;
 em7_0_0_FCLK_CLK0, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI RREADY" *)
 input wire s00_axi_rready;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI_CLK, ASSOCIATED_BUSIF S00_AXI, ASSOCIATED_RESET s00_axi_aresetn, FREQ_HZ 100000000, PHASE 0.000, INSERT_VIP 0, XIL_INTERFACENAME s00_axi_aclk, ASSOCIATED_RESET s00_axi_aresetn, FREQ_HZ 100000000, PHASE 0.000, ASSOCIATED_BUSIF S00_AXI, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 S00_AXI_CLK CLK, xilinx.com:signal:clock:1.0 s00_axi_aclk CLK" *)
-input wire s00_axi_aclk;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI_RST, POLARITY ACTIVE_LOW, INSERT_VIP 0, XIL_INTERFACENAME s00_axi_aresetn, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 S00_AXI_RST RST, xilinx.com:signal:reset:1.0 s00_axi_aresetn RST" *)
-input wire s00_axi_aresetn;
 
   myip_v1_0 #(
-    .C_S00_AXI_DATA_WIDTH(32),  // Width of S_AXI data bus
-    .C_S00_AXI_ADDR_WIDTH(4),  // Width of S_AXI address bus
     .C_M00_BRAM_ADDR_WIDTH(32),
     .C_M00_BRAM_DATA_WIDTH(32),
-    .C_M00_BRAM_WE_WIDTH(4)
+    .C_M00_BRAM_WE_WIDTH(4),
+    .C_S00_AXI_DATA_WIDTH(32),
+    .C_S00_AXI_ADDR_WIDTH(4)
   ) inst (
     .m00_bram_addr(m00_bram_addr),
     .m00_bram_clk(m00_bram_clk),
@@ -162,6 +162,8 @@ input wire s00_axi_aresetn;
     .m00_bram_en(m00_bram_en),
     .m00_bram_rst(m00_bram_rst),
     .m00_bram_we(m00_bram_we),
+    .s00_axi_aclk(s00_axi_aclk),
+    .s00_axi_aresetn(s00_axi_aresetn),
     .s00_axi_awaddr(s00_axi_awaddr),
     .s00_axi_awprot(s00_axi_awprot),
     .s00_axi_awvalid(s00_axi_awvalid),
@@ -180,8 +182,6 @@ input wire s00_axi_aresetn;
     .s00_axi_rdata(s00_axi_rdata),
     .s00_axi_rresp(s00_axi_rresp),
     .s00_axi_rvalid(s00_axi_rvalid),
-    .s00_axi_rready(s00_axi_rready),
-    .s00_axi_aclk(s00_axi_aclk),
-    .s00_axi_aresetn(s00_axi_aresetn)
+    .s00_axi_rready(s00_axi_rready)
   );
 endmodule

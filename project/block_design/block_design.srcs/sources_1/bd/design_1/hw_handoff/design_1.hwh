@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Fri May 14 16:53:30 2021" VIVADOVERSION="2018.3">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Fri May 14 20:39:29 2021" VIVADOVERSION="2018.3">
 
   <SYSTEMINFO ARCH="zynq" BOARD="em.avnet.com:zed:part0:1.4" DEVICE="7z020" NAME="design_1" PACKAGE="clg484" SPEEDGRADE="-1"/>
 
@@ -2024,17 +2024,17 @@
         </BUSINTERFACE>
       </BUSINTERFACES>
     </MODULE>
-    <MODULE COREREVISION="6" FULLNAME="/myip_0" HWVERSION="1.0" INSTANCE="myip_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="myip" VLNV="user.org:user:myip:1.0">
+    <MODULE COREREVISION="8" FULLNAME="/myip_0" HWVERSION="1.0" INSTANCE="myip_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="myip" VLNV="user.org:user:myip:1.0">
       <DOCUMENTS/>
       <ADDRESSBLOCKS>
         <ADDRESSBLOCK ACCESS="" INTERFACE="S00_AXI" NAME="S00_AXI_reg" RANGE="4096" USAGE="register"/>
       </ADDRESSBLOCKS>
       <PARAMETERS>
-        <PARAMETER NAME="C_S00_AXI_DATA_WIDTH" VALUE="32"/>
-        <PARAMETER NAME="C_S00_AXI_ADDR_WIDTH" VALUE="4"/>
         <PARAMETER NAME="C_M00_BRAM_ADDR_WIDTH" VALUE="32"/>
         <PARAMETER NAME="C_M00_BRAM_DATA_WIDTH" VALUE="32"/>
         <PARAMETER NAME="C_M00_BRAM_WE_WIDTH" VALUE="4"/>
+        <PARAMETER NAME="C_S00_AXI_DATA_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="C_S00_AXI_ADDR_WIDTH" VALUE="4"/>
         <PARAMETER NAME="Component_Name" VALUE="design_1_myip_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
         <PARAMETER NAME="C_S00_AXI_BASEADDR" VALUE="0x43C00000"/>
@@ -2074,6 +2074,16 @@
         <PORT DIR="O" LEFT="3" NAME="m00_bram_we" RIGHT="0" SIGIS="undef" SIGNAME="blk_mem_gen_0_web">
           <CONNECTIONS>
             <CONNECTION INSTANCE="blk_mem_gen_0" PORT="web"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="50000000" DIR="I" NAME="s00_axi_aclk" SIGIS="clk" SIGNAME="processing_system7_0_FCLK_CLK0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0" PORT="FCLK_CLK0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s00_axi_aresetn" SIGIS="rst" SIGNAME="rst_ps7_0_50M_peripheral_aresetn">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="rst_ps7_0_50M" PORT="peripheral_aresetn"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" LEFT="3" NAME="s00_axi_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="axi_mem_intercon_M01_AXI_awaddr">
@@ -2171,16 +2181,6 @@
             <CONNECTION INSTANCE="axi_mem_intercon" PORT="M01_AXI_rready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="s00_axi_aclk" SIGIS="clk" SIGNAME="processing_system7_0_FCLK_CLK0">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="processing_system7_0" PORT="FCLK_CLK0"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" NAME="s00_axi_aresetn" SIGIS="rst" SIGNAME="rst_ps7_0_50M_peripheral_aresetn">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="rst_ps7_0_50M" PORT="peripheral_aresetn"/>
-          </CONNECTIONS>
-        </PORT>
       </PORTS>
       <BUSINTERFACES>
         <BUSINTERFACE BUSNAME="axi_mem_intercon_M01_AXI" DATAWIDTH="32" NAME="S00_AXI" TYPE="SLAVE" VLNV="xilinx.com:interface:aximm:1.0">
@@ -2218,25 +2218,25 @@
           <PARAMETER NAME="WUSER_BITS_PER_BYTE" VALUE="0"/>
           <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
           <PORTMAPS>
-            <PORTMAP LOGICAL="AWADDR" PHYSICAL="s00_axi_awaddr"/>
-            <PORTMAP LOGICAL="AWPROT" PHYSICAL="s00_axi_awprot"/>
+            <PORTMAP LOGICAL="BVALID" PHYSICAL="s00_axi_bvalid"/>
+            <PORTMAP LOGICAL="RREADY" PHYSICAL="s00_axi_rready"/>
+            <PORTMAP LOGICAL="BREADY" PHYSICAL="s00_axi_bready"/>
             <PORTMAP LOGICAL="AWVALID" PHYSICAL="s00_axi_awvalid"/>
             <PORTMAP LOGICAL="AWREADY" PHYSICAL="s00_axi_awready"/>
+            <PORTMAP LOGICAL="AWPROT" PHYSICAL="s00_axi_awprot"/>
             <PORTMAP LOGICAL="WDATA" PHYSICAL="s00_axi_wdata"/>
-            <PORTMAP LOGICAL="WSTRB" PHYSICAL="s00_axi_wstrb"/>
+            <PORTMAP LOGICAL="RRESP" PHYSICAL="s00_axi_rresp"/>
+            <PORTMAP LOGICAL="ARPROT" PHYSICAL="s00_axi_arprot"/>
+            <PORTMAP LOGICAL="RVALID" PHYSICAL="s00_axi_rvalid"/>
+            <PORTMAP LOGICAL="ARADDR" PHYSICAL="s00_axi_araddr"/>
+            <PORTMAP LOGICAL="AWADDR" PHYSICAL="s00_axi_awaddr"/>
+            <PORTMAP LOGICAL="ARREADY" PHYSICAL="s00_axi_arready"/>
             <PORTMAP LOGICAL="WVALID" PHYSICAL="s00_axi_wvalid"/>
             <PORTMAP LOGICAL="WREADY" PHYSICAL="s00_axi_wready"/>
-            <PORTMAP LOGICAL="BRESP" PHYSICAL="s00_axi_bresp"/>
-            <PORTMAP LOGICAL="BVALID" PHYSICAL="s00_axi_bvalid"/>
-            <PORTMAP LOGICAL="BREADY" PHYSICAL="s00_axi_bready"/>
-            <PORTMAP LOGICAL="ARADDR" PHYSICAL="s00_axi_araddr"/>
-            <PORTMAP LOGICAL="ARPROT" PHYSICAL="s00_axi_arprot"/>
             <PORTMAP LOGICAL="ARVALID" PHYSICAL="s00_axi_arvalid"/>
-            <PORTMAP LOGICAL="ARREADY" PHYSICAL="s00_axi_arready"/>
+            <PORTMAP LOGICAL="WSTRB" PHYSICAL="s00_axi_wstrb"/>
+            <PORTMAP LOGICAL="BRESP" PHYSICAL="s00_axi_bresp"/>
             <PORTMAP LOGICAL="RDATA" PHYSICAL="s00_axi_rdata"/>
-            <PORTMAP LOGICAL="RRESP" PHYSICAL="s00_axi_rresp"/>
-            <PORTMAP LOGICAL="RVALID" PHYSICAL="s00_axi_rvalid"/>
-            <PORTMAP LOGICAL="RREADY" PHYSICAL="s00_axi_rready"/>
           </PORTMAPS>
         </BUSINTERFACE>
         <BUSINTERFACE BUSNAME="myip_0_m00_bram" NAME="m00_bram" TYPE="INITIATOR" VLNV="xilinx.com:interface:bram:1.0">
@@ -2247,13 +2247,13 @@
           <PARAMETER NAME="READ_WRITE_MODE"/>
           <PARAMETER NAME="READ_LATENCY" VALUE="1"/>
           <PORTMAPS>
+            <PORTMAP LOGICAL="RST" PHYSICAL="m00_bram_rst"/>
+            <PORTMAP LOGICAL="CLK" PHYSICAL="m00_bram_clk"/>
+            <PORTMAP LOGICAL="DIN" PHYSICAL="m00_bram_wrdata"/>
             <PORTMAP LOGICAL="EN" PHYSICAL="m00_bram_en"/>
+            <PORTMAP LOGICAL="DOUT" PHYSICAL="m00_bram_rddata"/>
             <PORTMAP LOGICAL="WE" PHYSICAL="m00_bram_we"/>
             <PORTMAP LOGICAL="ADDR" PHYSICAL="m00_bram_addr"/>
-            <PORTMAP LOGICAL="CLK" PHYSICAL="m00_bram_clk"/>
-            <PORTMAP LOGICAL="RST" PHYSICAL="m00_bram_rst"/>
-            <PORTMAP LOGICAL="DIN" PHYSICAL="m00_bram_wrdata"/>
-            <PORTMAP LOGICAL="DOUT" PHYSICAL="m00_bram_rddata"/>
           </PORTMAPS>
         </BUSINTERFACE>
       </BUSINTERFACES>
@@ -3408,9 +3408,9 @@
             <CONNECTION INSTANCE="axi_mem_intercon" PORT="M00_ACLK"/>
             <CONNECTION INSTANCE="axi_mem_intercon" PORT="M01_ACLK"/>
             <CONNECTION INSTANCE="axi_mem_intercon" PORT="S00_ACLK"/>
-            <CONNECTION INSTANCE="myip_0" PORT="s00_axi_aclk"/>
             <CONNECTION INSTANCE="processing_system7_0" PORT="M_AXI_GP0_ACLK"/>
             <CONNECTION INSTANCE="rst_ps7_0_50M" PORT="slowest_sync_clk"/>
+            <CONNECTION INSTANCE="myip_0" PORT="s00_axi_aclk"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="FCLK_RESET0_N" SIGIS="rst" SIGNAME="processing_system7_0_FCLK_RESET0_N">
