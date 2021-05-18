@@ -22,7 +22,7 @@ module my_pe_array #(
 );
     
     reg  valid;                            // valid signal into PE array
-    wire [BLK_WIDTH-1:0] dvalid;           // dvalid from PE array
+    wire [BLK_WIDTH**2-1:0] dvalid;        // dvalid from PE array
     reg  dvalid_r;                         // register holding davalids
     wire [31:0] dout [0:BLK_WIDTH**2-1];   // douts from PE array
     reg  [31:0] dout_r [0:BLK_WIDTH**2-1]; // registers holding douts

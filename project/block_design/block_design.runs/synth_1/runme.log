@@ -17,9 +17,9 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 2764 
+INFO: Helper process launched with PID 704 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 414.547 ; gain = 113.559
+Starting RTL Elaboration : Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 413.785 ; gain = 114.039
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'design_1_wrapper' [D:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.v:12]
 INFO: [Synth 8-6157] synthesizing module 'design_1' [D:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/synth/design_1.v:13]
@@ -1823,13 +1823,13 @@ INFO: [Synth 8-3491] module 'blk_mem_gen_v8_4_2' declared at 'd:/HSD_SNU_2021/pr
 INFO: [Synth 8-256] done synthesizing module 'design_1_blk_mem_gen_0_0' (63#1) [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ip/design_1_blk_mem_gen_0_0/synth/design_1_blk_mem_gen_0_0.vhd:80]
 WARNING: [Synth 8-350] instance 'blk_mem_gen_0' of module 'design_1_blk_mem_gen_0_0' requires 16 connections, but only 14 given [D:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/synth/design_1.v:336]
 INFO: [Synth 8-6157] synthesizing module 'design_1_myip_0_0' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ip/design_1_myip_0_0/synth/design_1_myip_0_0.v:56]
-INFO: [Synth 8-6157] synthesizing module 'myip_v1_0' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/hdl/myip_v1_0.v:4]
+INFO: [Synth 8-6157] synthesizing module 'myip_v1_0' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/659f/hdl/myip_v1_0.v:4]
 	Parameter C_M00_BRAM_ADDR_WIDTH bound to: 32 - type: integer 
 	Parameter C_M00_BRAM_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_M00_BRAM_WE_WIDTH bound to: 4 - type: integer 
 	Parameter C_S00_AXI_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_S00_AXI_ADDR_WIDTH bound to: 4 - type: integer 
-INFO: [Synth 8-6157] synthesizing module 'myip_v1_0_S00_AXI' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/hdl/myip_v1_0_S00_AXI.v:4]
+INFO: [Synth 8-6157] synthesizing module 'myip_v1_0_S00_AXI' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/659f/hdl/myip_v1_0_S00_AXI.v:4]
 	Parameter BRAM_ADDR_WIDTH bound to: 32 - type: integer 
 	Parameter BRAM_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter BRAM_WE_WIDTH bound to: 4 - type: integer 
@@ -1837,9 +1837,9 @@ INFO: [Synth 8-6157] synthesizing module 'myip_v1_0_S00_AXI' [d:/HSD_SNU_2021/pr
 	Parameter C_S_AXI_ADDR_WIDTH bound to: 4 - type: integer 
 	Parameter ADDR_LSB bound to: 2 - type: integer 
 	Parameter OPT_MEM_ADDR_BITS bound to: 1 - type: integer 
-INFO: [Synth 8-226] default block is never used [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/hdl/myip_v1_0_S00_AXI.v:232]
-INFO: [Synth 8-226] default block is never used [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/hdl/myip_v1_0_S00_AXI.v:373]
-INFO: [Synth 8-6157] synthesizing module 'my_pe_array' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:3]
+INFO: [Synth 8-226] default block is never used [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/659f/hdl/myip_v1_0_S00_AXI.v:232]
+INFO: [Synth 8-226] default block is never used [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/659f/hdl/myip_v1_0_S00_AXI.v:373]
+INFO: [Synth 8-6157] synthesizing module 'my_pe_array' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/659f/src/my_pe_array.v:3]
 	Parameter BRAM_ADDR_WIDTH bound to: 32 - type: integer 
 	Parameter BRAM_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter BRAM_WE_WIDTH bound to: 4 - type: integer 
@@ -1850,7 +1850,7 @@ INFO: [Synth 8-6157] synthesizing module 'my_pe_array' [d:/HSD_SNU_2021/project/
 	Parameter S_CALC bound to: 3'b010 
 	Parameter S_HARV bound to: 3'b011 
 	Parameter S_DONE bound to: 3'b100 
-INFO: [Synth 8-6157] synthesizing module 'my_pe' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe.v:3]
+INFO: [Synth 8-6157] synthesizing module 'my_pe' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/659f/src/my_pe.v:3]
 INFO: [Synth 8-638] synthesizing module 'floating_point_MAC' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ip/design_1_myip_0_0/src/floating_point_MAC/synth/floating_point_MAC.vhd:74]
 	Parameter C_XDEVICEFAMILY bound to: zynq - type: string 
 	Parameter C_HAS_ADD bound to: 0 - type: integer 
@@ -1924,63 +1924,7 @@ INFO: [Synth 8-638] synthesizing module 'floating_point_MAC' [d:/HSD_SNU_2021/pr
 	Parameter C_FIXED_DATA_UNSIGNED bound to: 0 - type: integer 
 INFO: [Synth 8-3491] module 'floating_point_v7_1_7' declared at 'd:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ip/design_1_myip_0_0/src/floating_point_MAC/hdl/floating_point_v7_1_vh_rfs.vhd:91615' bound to instance 'U0' of component 'floating_point_v7_1_7' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ip/design_1_myip_0_0/src/floating_point_MAC/synth/floating_point_MAC.vhd:208]
 INFO: [Synth 8-256] done synthesizing module 'floating_point_MAC' (98#1) [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ip/design_1_myip_0_0/src/floating_point_MAC/synth/floating_point_MAC.vhd:74]
-INFO: [Synth 8-6155] done synthesizing module 'my_pe' (99#1) [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe.v:3]
-WARNING: [Synth 8-324] index 8 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 9 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 10 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 11 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 12 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 13 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 14 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 15 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 16 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 17 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 18 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 19 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 20 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 21 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 22 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 23 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 24 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 25 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 26 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 27 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 28 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 29 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 30 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 31 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 32 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 33 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 34 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 35 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 36 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 37 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 38 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 39 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 40 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 41 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 42 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 43 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 44 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 45 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 46 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 47 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 48 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 49 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 50 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 51 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 52 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 53 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 54 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 55 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 56 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 57 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 58 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 59 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 60 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 61 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 62 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
-WARNING: [Synth 8-324] index 63 out of range [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:65]
+INFO: [Synth 8-6155] done synthesizing module 'my_pe' (99#1) [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/659f/src/my_pe.v:3]
 INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ip/design_1_myip_0_0/src/clk_wiz_0_4/clk_wiz_0.v:70]
 INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0_clk_wiz' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ip/design_1_myip_0_0/src/clk_wiz_0_4/clk_wiz_0_clk_wiz.v:68]
 INFO: [Synth 8-6157] synthesizing module 'IBUF' [C:/Xilinx/Vivado/2018.3/scripts/rt/data/unisim_comp.v:20408]
@@ -2044,9 +1988,9 @@ INFO: [Synth 8-6157] synthesizing module 'BUFG' [C:/Xilinx/Vivado/2018.3/scripts
 INFO: [Synth 8-6155] done synthesizing module 'BUFG' (102#1) [C:/Xilinx/Vivado/2018.3/scripts/rt/data/unisim_comp.v:609]
 INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0_clk_wiz' (103#1) [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ip/design_1_myip_0_0/src/clk_wiz_0_4/clk_wiz_0_clk_wiz.v:68]
 INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (104#1) [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ip/design_1_myip_0_0/src/clk_wiz_0_4/clk_wiz_0.v:70]
-INFO: [Synth 8-6155] done synthesizing module 'my_pe_array' (105#1) [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:3]
-INFO: [Synth 8-6155] done synthesizing module 'myip_v1_0_S00_AXI' (106#1) [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/hdl/myip_v1_0_S00_AXI.v:4]
-INFO: [Synth 8-6155] done synthesizing module 'myip_v1_0' (107#1) [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/hdl/myip_v1_0.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'my_pe_array' (105#1) [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/659f/src/my_pe_array.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'myip_v1_0_S00_AXI' (106#1) [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/659f/hdl/myip_v1_0_S00_AXI.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'myip_v1_0' (107#1) [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/659f/hdl/myip_v1_0.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'design_1_myip_0_0' (108#1) [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ip/design_1_myip_0_0/synth/design_1_myip_0_0.v:56]
 INFO: [Synth 8-6157] synthesizing module 'design_1_processing_system7_0_0' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:60]
 INFO: [Synth 8-6157] synthesizing module 'processing_system7_v5_5_processing_system7' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:162]
@@ -2304,7 +2248,7 @@ WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized5 has unconnec
 WARNING: [Synth 8-3331] design xbip_pipe_v3_0_5_viv__parameterized5 has unconnected port SSET
 INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:02:03 ; elapsed = 00:02:07 . Memory (MB): peak = 885.270 ; gain = 584.281
+Finished RTL Elaboration : Time (s): cpu = 00:01:58 ; elapsed = 00:02:03 . Memory (MB): peak = 885.512 ; gain = 585.766
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -2317,10 +2261,10 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:02:04 ; elapsed = 00:02:08 . Memory (MB): peak = 885.270 ; gain = 584.281
+Finished Handling Custom Attributes : Time (s): cpu = 00:02:00 ; elapsed = 00:02:04 . Memory (MB): peak = 885.512 ; gain = 585.766
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:02:04 ; elapsed = 00:02:08 . Memory (MB): peak = 885.270 ; gain = 584.281
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:02:00 ; elapsed = 00:02:04 . Memory (MB): peak = 885.512 ; gain = 585.766
 ---------------------------------------------------------------------------------
 INFO: [Netlist 29-17] Analyzing 23065 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -2342,16 +2286,16 @@ Finished Parsing XDC File [d:/HSD_SNU_2021/project/block_design/block_design.src
 Parsing XDC File [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_50M_0/design_1_rst_ps7_0_50M_0.xdc] for cell 'design_1_i/rst_ps7_0_50M/U0'
 Finished Parsing XDC File [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_50M_0/design_1_rst_ps7_0_50M_0.xdc] for cell 'design_1_i/rst_ps7_0_50M/U0'
 INFO: [Timing 38-2] Deriving generated clocks
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.493 . Memory (MB): peak = 1866.051 ; gain = 0.000
-write_xdc: Time (s): cpu = 00:00:06 ; elapsed = 00:00:05 . Memory (MB): peak = 1866.051 ; gain = 129.473
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.495 . Memory (MB): peak = 1864.313 ; gain = 0.000
+write_xdc: Time (s): cpu = 00:00:07 ; elapsed = 00:00:05 . Memory (MB): peak = 1864.313 ; gain = 129.254
 Parsing XDC File [D:/HSD_SNU_2021/project/block_design/block_design.runs/synth_1/dont_touch.xdc]
 Finished Parsing XDC File [D:/HSD_SNU_2021/project/block_design/block_design.runs/synth_1/dont_touch.xdc]
 INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/HSD_SNU_2021/project/block_design/block_design.runs/synth_1/dont_touch.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/design_1_wrapper_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/design_1_wrapper_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.490 . Memory (MB): peak = 1870.082 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.495 . Memory (MB): peak = 1869.051 ; gain = 0.000
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.502 . Memory (MB): peak = 1872.629 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.499 . Memory (MB): peak = 1870.613 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 2194 instances were transformed.
   FDE => FDRE: 2176 instances
@@ -2359,17 +2303,17 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   MUXCY_L => MUXCY: 4 instances
   SRL16 => SRL16E: 1 instances
 
-Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.524 . Memory (MB): peak = 1872.629 ; gain = 0.000
-Constraint Validation Runtime : Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 1872.629 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.499 . Memory (MB): peak = 1870.613 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1870.613 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:03:29 ; elapsed = 00:03:29 . Memory (MB): peak = 1875.164 ; gain = 1574.176
+Finished Constraint Validation : Time (s): cpu = 00:03:24 ; elapsed = 00:03:24 . Memory (MB): peak = 1873.164 ; gain = 1573.418
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z020clg484-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:03:29 ; elapsed = 00:03:29 . Memory (MB): peak = 1875.164 ; gain = 1574.176
+Finished Loading Part and Timing Information : Time (s): cpu = 00:03:24 ; elapsed = 00:03:24 . Memory (MB): peak = 1873.164 ; gain = 1573.418
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -2453,7 +2397,7 @@ Applied set_property DONT_TOUCH = true for design_1_i/rst_ps7_0_50M. (constraint
 Applied set_property DONT_TOUCH = true for design_1_i/axi_mem_intercon/s00_couplers/auto_pc. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/axi_mem_intercon/m01_couplers/auto_pc. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:03:33 ; elapsed = 00:03:33 . Memory (MB): peak = 1875.164 ; gain = 1574.176
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:03:28 ; elapsed = 00:03:29 . Memory (MB): peak = 1873.164 ; gain = 1573.418
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5544] ROM "max_wrap_burst" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "max_wrap_burst" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
@@ -2640,7 +2584,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'gen_axi.write_cs_reg' usin
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'axi_data_fifo_v2_1_17_axic_reg_srl_fifo'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:03:51 ; elapsed = 00:03:52 . Memory (MB): peak = 1875.164 ; gain = 1574.176
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:03:46 ; elapsed = 00:03:48 . Memory (MB): peak = 1873.164 ; gain = 1573.418
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-223] decloning instance 'floating_point_MAC:/U0/i_synth/DELAY_DIVIDE_BY_ZERO' (floating_point_v7_1_7_delay__parameterized25) to 'floating_point_MAC:/U0/i_synth/DELAY_ACCUM_OVERFLOW'
 INFO: [Synth 8-223] decloning instance 'floating_point_MAC:/U0/i_synth/DELAY_DIVIDE_BY_ZERO' (floating_point_v7_1_7_delay__parameterized25) to 'floating_point_MAC:/U0/i_synth/DELAY_ACCUM_INPUT_OVERFLOW'
@@ -2716,7 +2660,7 @@ Report RTL Partitions:
 |64    |my_pe__xdcDup__62__GC0 |           1|        65|
 |65    |my_pe__xdcDup__63__GC0 |           1|        65|
 |66    |my_pe__GC0             |           1|        65|
-|67    |my_pe_array__GC0       |           1|      7661|
+|67    |my_pe_array__GC0       |           1|      7829|
 |68    |myip_v1_0_S00_AXI__GC0 |           1|       907|
 |69    |design_1__GC0          |           1|      9653|
 +------+-----------------------+------------+----------+
@@ -2770,8 +2714,8 @@ INFO: [Synth 8-5546] ROM "FMA_OP.OP/special_detect/detector_b/exp_all_one_ip" wo
 INFO: [Synth 8-5546] ROM "FMA_OP.OP/special_detect/detector_b/exp_all_zero_ip" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "FMA_OP.OP/special_detect/detector_c/exp_all_one_ip" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "FMA_OP.OP/special_detect/detector_c/exp_all_zero_ip" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-4471] merging register 'cnt_CALC_reg[7:0]' into 'cnt_CALC_reg[7:0]' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:74]
-INFO: [Synth 8-4471] merging register 'cnt_CALC_reg[7:0]' into 'cnt_CALC_reg[7:0]' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/139d/src/my_pe_array.v:74]
+INFO: [Synth 8-4471] merging register 'cnt_CALC_reg[7:0]' into 'cnt_CALC_reg[7:0]' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/659f/src/my_pe_array.v:74]
+INFO: [Synth 8-4471] merging register 'cnt_CALC_reg[7:0]' into 'cnt_CALC_reg[7:0]' [d:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/ipshared/659f/src/my_pe_array.v:74]
 INFO: [Synth 8-5544] ROM "cnt_LOAD0" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "cnt_CALC0" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
 INFO: [Synth 8-5546] ROM "gb_reg[0]" won't be mapped to RAM because it is too sparse
@@ -2959,7 +2903,7 @@ INFO: [Synth 8-3886] merging instance 'design_1_i/i_0/blk_mem_gen_0/U0/inst_blk_
 INFO: [Synth 8-3886] merging instance 'design_1_i/i_0/blk_mem_gen_0/U0/inst_blk_mem_gen/gnbram.gnative_mem_map_bmg.native_mem_map_blk_mem_gen/valid.cstr/ramloop[0].ram.r/SAFETY_CKT_GEN.ENB_NO_REG.ENB_dly_reg' (FD) to 'design_1_i/i_0/blk_mem_gen_0/U0/inst_blk_mem_gen/gnbram.gnative_mem_map_bmg.native_mem_map_blk_mem_gen/valid.cstr/ramloop[1].ram.r/SAFETY_CKT_GEN.ENB_NO_REG.ENB_dly_reg'
 INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:04:30 ; elapsed = 00:04:32 . Memory (MB): peak = 1875.164 ; gain = 1574.176
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:04:31 ; elapsed = 00:04:35 . Memory (MB): peak = 1873.164 ; gain = 1573.418
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -3032,7 +2976,7 @@ Report RTL Partitions:
 |64    |my_pe__xdcDup__62__GC0 |           1|        97|
 |65    |my_pe__xdcDup__63__GC0 |           1|        97|
 |66    |my_pe__GC0             |           1|        97|
-|67    |my_pe_array__GC0       |           1|      7499|
+|67    |my_pe_array__GC0       |           1|      7895|
 |68    |myip_v1_0_S00_AXI__GC0 |           1|       557|
 |69    |design_1__GC0          |           1|      6418|
 +------+-----------------------+------------+----------+
@@ -3042,13 +2986,13 @@ Start Applying XDC Timing Constraints
 INFO: [Synth 8-5578] Moved timing constraint from pin 'design_1_i/myip_0/inst/myip_v1_0_S00_AXI_inst/PE_ARRAY/u_clk/inst/clk_in1' to pin 'processing_system7_0/inst/buffer_fclk_clk_0.FCLK_CLK_0_BUFG/O'
 INFO: [Synth 8-5819] Moved 1 constraints on hierarchical pins to their respective driving/loading pins
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:04:48 ; elapsed = 00:04:50 . Memory (MB): peak = 1875.164 ; gain = 1574.176
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:04:48 ; elapsed = 00:04:52 . Memory (MB): peak = 1873.164 ; gain = 1573.418
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:04:57 ; elapsed = 00:05:00 . Memory (MB): peak = 1875.164 ; gain = 1574.176
+Finished Timing Optimization : Time (s): cpu = 00:04:58 ; elapsed = 00:05:02 . Memory (MB): peak = 1873.164 ; gain = 1573.418
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -3121,7 +3065,7 @@ Report RTL Partitions:
 |64    |my_pe__xdcDup__62__GC0 |           1|        97|
 |65    |my_pe__xdcDup__63__GC0 |           1|        97|
 |66    |my_pe__GC0             |           1|        97|
-|67    |my_pe_array__GC0       |           1|      7499|
+|67    |my_pe_array__GC0       |           1|      7895|
 |68    |myip_v1_0_S00_AXI__GC0 |           1|       557|
 |69    |design_1__GC0          |           1|      6418|
 +------+-----------------------+------------+----------+
@@ -3129,7 +3073,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:05:43 ; elapsed = 00:05:47 . Memory (MB): peak = 1875.164 ; gain = 1574.176
+Finished Technology Mapping : Time (s): cpu = 00:05:42 ; elapsed = 00:05:47 . Memory (MB): peak = 1873.164 ; gain = 1573.418
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -3154,7 +3098,7 @@ INFO: [Synth 8-5365] Flop inst/gen_axilite.gen_b2s_conv.axilite_b2s/SI_REG/ar.ar
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:05:51 ; elapsed = 00:05:55 . Memory (MB): peak = 1875.164 ; gain = 1574.176
+Finished IO Insertion : Time (s): cpu = 00:05:50 ; elapsed = 00:05:55 . Memory (MB): peak = 1873.164 ; gain = 1573.418
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -3167,7 +3111,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:05:53 ; elapsed = 00:05:56 . Memory (MB): peak = 1875.164 ; gain = 1574.176
+Finished Renaming Generated Instances : Time (s): cpu = 00:05:51 ; elapsed = 00:05:56 . Memory (MB): peak = 1873.164 ; gain = 1573.418
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -3179,25 +3123,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:06:33 ; elapsed = 00:06:37 . Memory (MB): peak = 1875.164 ; gain = 1574.176
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:06:29 ; elapsed = 00:06:34 . Memory (MB): peak = 1873.164 ; gain = 1573.418
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:06:35 ; elapsed = 00:06:38 . Memory (MB): peak = 1875.164 ; gain = 1574.176
+Finished Renaming Generated Ports : Time (s): cpu = 00:06:31 ; elapsed = 00:06:36 . Memory (MB): peak = 1873.164 ; gain = 1573.418
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:06:41 ; elapsed = 00:06:45 . Memory (MB): peak = 1875.164 ; gain = 1574.176
+Finished Handling Custom Attributes : Time (s): cpu = 00:06:36 ; elapsed = 00:06:41 . Memory (MB): peak = 1873.164 ; gain = 1573.418
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:06:42 ; elapsed = 00:06:46 . Memory (MB): peak = 1875.164 ; gain = 1574.176
+Finished Renaming Generated Nets : Time (s): cpu = 00:06:38 ; elapsed = 00:06:43 . Memory (MB): peak = 1873.164 ; gain = 1573.418
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -3218,17 +3162,17 @@ Report Cell Usage:
 |3     |CARRY4     |   504|
 |4     |DSP48E1    |    64|
 |5     |DSP48E1_1  |    64|
-|6     |LUT1       |   900|
-|7     |LUT2       |  7714|
-|8     |LUT3       |  9430|
-|9     |LUT4       | 10356|
-|10    |LUT5       |  6053|
-|11    |LUT6       | 19430|
+|6     |LUT1       |   901|
+|7     |LUT2       |  5666|
+|8     |LUT3       |  9428|
+|9     |LUT4       | 10392|
+|10    |LUT5       |  8131|
+|11    |LUT6       | 19516|
 |12    |MMCME2_ADV |     1|
 |13    |MUXCY      | 14272|
 |14    |MUXCY_L    |     3|
-|15    |MUXF7      |   896|
-|16    |MUXF8      |   128|
+|15    |MUXF7      |   835|
+|16    |MUXF8      |    78|
 |17    |PS7        |     1|
 |18    |RAMB36E1   |     2|
 |19    |SRL16      |     1|
@@ -3237,24 +3181,24 @@ Report Cell Usage:
 |22    |XORCY      |  6148|
 |23    |FDE        |  2112|
 |24    |FDR        |     9|
-|25    |FDRE       | 74593|
+|25    |FDRE       | 74615|
 |26    |FDSE       |    27|
 |27    |IBUF       |     1|
 +------+-----------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:06:42 ; elapsed = 00:06:46 . Memory (MB): peak = 1875.164 ; gain = 1574.176
+Finished Writing Synthesis Report : Time (s): cpu = 00:06:38 ; elapsed = 00:06:43 . Memory (MB): peak = 1873.164 ; gain = 1573.418
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 10 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:03:17 ; elapsed = 00:05:29 . Memory (MB): peak = 1875.164 ; gain = 584.281
-Synthesis Optimization Complete : Time (s): cpu = 00:06:43 ; elapsed = 00:06:46 . Memory (MB): peak = 1875.164 ; gain = 1574.176
+Synthesis Optimization Runtime : Time (s): cpu = 00:03:17 ; elapsed = 00:05:26 . Memory (MB): peak = 1873.164 ; gain = 585.766
+Synthesis Optimization Complete : Time (s): cpu = 00:06:38 ; elapsed = 00:06:43 . Memory (MB): peak = 1873.164 ; gain = 1573.418
 INFO: [Project 1-571] Translating synthesized netlist
-INFO: [Netlist 29-17] Analyzing 24204 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 24093 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 1 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 WARNING: [Opt 31-32] Removing redundant IBUF since it is not being driven by a top-level port. design_1_i/myip_0/inst/myip_v1_0_S00_AXI_inst/PE_ARRAY/u_clk/inst/clkin1_ibufg 
 Resolution: The tool has removed redundant IBUF. To resolve this warning, check for redundant IBUF in the input design.
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.284 . Memory (MB): peak = 2169.688 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.269 . Memory (MB): peak = 2170.395 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 6219 instances were transformed.
   (MUXCY,XORCY) => CARRY4: 4097 instances
@@ -3263,13 +3207,13 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   SRL16 => SRL16E: 1 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-628 Infos, 206 Warnings, 0 Critical Warnings and 0 Errors encountered.
+628 Infos, 150 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:08:05 ; elapsed = 00:08:09 . Memory (MB): peak = 2169.688 ; gain = 1875.938
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.293 . Memory (MB): peak = 2169.688 ; gain = 0.000
+synth_design: Time (s): cpu = 00:07:54 ; elapsed = 00:07:59 . Memory (MB): peak = 2170.395 ; gain = 1878.008
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.271 . Memory (MB): peak = 2170.395 ; gain = 0.000
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
 INFO: [Common 17-1381] The checkpoint 'D:/HSD_SNU_2021/project/block_design/block_design.runs/synth_1/design_1_wrapper.dcp' has been generated.
-write_checkpoint: Time (s): cpu = 00:00:59 ; elapsed = 00:00:35 . Memory (MB): peak = 2169.688 ; gain = 0.000
+write_checkpoint: Time (s): cpu = 00:00:56 ; elapsed = 00:00:33 . Memory (MB): peak = 2170.395 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_utilization -file design_1_wrapper_utilization_synth.rpt -pb design_1_wrapper_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Fri May 14 20:49:10 2021...
+INFO: [Common 17-206] Exiting Vivado at Tue May 18 12:34:53 2021...

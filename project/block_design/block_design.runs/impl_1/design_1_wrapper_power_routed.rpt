@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Fri May 14 21:06:09 2021
+| Date             : Tue May 18 12:53:54 2021
 | Host             : DESKTOP-G5VPU6Q running 64-bit major release  (build 9200)
 | Command          : report_power -file design_1_wrapper_power_routed.rpt -pb design_1_wrapper_power_summary_routed.pb -rpx design_1_wrapper_power_routed.rpx
 | Design           : design_1_wrapper
@@ -53,17 +53,17 @@ Table of Contents
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
 | Clocks                  |     0.108 |        6 |       --- |             --- |
-| Slice Logic             |     0.239 |   159988 |       --- |             --- |
-|   LUT as Logic          |     0.197 |    42623 |     53200 |           80.12 |
-|   Register              |     0.024 |    75696 |    106400 |           71.14 |
-|   LUT as Shift Register |     0.010 |     2658 |     17400 |           15.28 |
+| Slice Logic             |     0.232 |   160051 |       --- |             --- |
+|   LUT as Logic          |     0.192 |    43759 |     53200 |           82.25 |
+|   Register              |     0.023 |    75718 |    106400 |           71.16 |
+|   LUT as Shift Register |     0.009 |     2649 |     17400 |           15.22 |
 |   CARRY4                |     0.007 |     4460 |     13300 |           33.53 |
-|   F7/F8 Muxes           |    <0.001 |     1024 |     53200 |            1.92 |
+|   F7/F8 Muxes           |    <0.001 |      913 |     53200 |            1.72 |
 |   Others                |     0.000 |    21101 |       --- |             --- |
-| Signals                 |     0.303 |    98185 |       --- |             --- |
+| Signals                 |     0.311 |    98434 |       --- |             --- |
 | Block RAM               |     0.003 |        2 |       140 |            1.43 |
 | MMCM                    |     0.105 |        1 |         4 |           25.00 |
-| DSPs                    |     0.039 |      128 |       220 |           58.18 |
+| DSPs                    |     0.038 |      128 |       220 |           58.18 |
 | PS7                     |     1.528 |        1 |       --- |             --- |
 | Static Power            |     0.166 |          |           |                 |
 | Total                   |     2.491 |          |           |                 |
@@ -164,8 +164,8 @@ Table of Contents
 |       xbar               |     0.002 |
 |     blk_mem_gen_0        |     0.003 |
 |       U0                 |     0.003 |
-|     myip_0               |     0.789 |
-|       inst               |     0.789 |
+|     myip_0               |     0.788 |
+|       inst               |     0.788 |
 |     processing_system7_0 |     1.529 |
 |       inst               |     1.529 |
 +--------------------------+-----------+
