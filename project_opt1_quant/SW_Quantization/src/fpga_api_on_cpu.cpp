@@ -89,7 +89,7 @@ void dequantize(int* quantized, float* output, int num_output, int offset, float
 {
   for(int i = 0; i < num_output; i++)
   {
-    output[i] = scale * (quantized[i] - offset) ; // TODO: convert quantized value to floating point
+    output[i] = scale * (quantized[i] - offset); // TODO: convert quantized value to floating point
   }
 }
 
