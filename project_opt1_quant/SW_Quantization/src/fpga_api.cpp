@@ -123,61 +123,6 @@ const int *__attribute__((optimize("O0"))) FPGA::qblockMM(Compute* comp)
   return qdata_;
 }
 
-const float* FPGA::blockMM(Compute* comp)
-{
-  num_block_call_ += 1;
-
-  // cpu version
-  int* m1 = this->qmatrix_M1();
-  int* m2 = this->qmatrix_M2();
-  float* out  = reinterpret_cast<float*>(output_M);  
-
-  if(comp->quantized)
-  {
-    char act_bits_min = 0;
-    char act_bits_max = (1<<(comp->act_bits-1))-1;
-
-    float act_scale = (comp->act_max - comp->act_min) / (float)act_bits_max; // TODO calculate the scale factor
-    char act_offset = - comp->act_min / act_scale; // TODO calculate the zero-offset
-    quantize(m2, qm2_, v_size_ * v_size_, act_bits_min, act_bits_max, act_offset, act_scale); // TODO complete quantize function
-
-    char weight_bits_min = 0;
-    char weight_bits_max = (1<<(comp->weight_bits-1))-1;
-
-    float weight_scale = (comp->weight_max - comp->weight_min) / (float)weight_bits_max;; // TODO calculate the scale factor
-    char weight_offset = - comp->weight_min / weight_scale; // TODO calculate the zero-offset
-    quantize(m1, qm1_, v_size_ * v_size_, weight_bits_min, weight_bits_max, weight_offset, weight_scale); // TODO complete quantize function
-
-    for(int i = 0; i < v_size_; ++i)
-    {
-      for(int j = 0; j < v_size_; ++j){    
-        qout_M[v_size_*i+j] = 0;
-        for(int k = 0; k < v_size_; ++k){
-          qout_M[v_size_*i+j] += (qm1_[v_size_*i+k] - weight_offset) * (qm2_[v_size_*k + j] - act_offset);
-        }
-      }
-    }
-
-    dequantize(qout_, out, v_size_*v_size_, 0, act_scale * weight_scale); // TODO complete dequantize function
-  }
-  else{
-    for(int i = 0; i < v_size_; ++i)
-    {
-      for(int j = 0; j < v_size_; ++j){    
-        out[v_size_*i+j] = 0;
-        for(int k = 0; k < v_size_; ++k){
-          out[v_size_*i+j] += m1[v_size_*i+k] * m2[v_size_*k + j];
-        }
-      }
-    }
-  }
-
-  for(int i = 0; i < m1_size_; ++i)
-    data_M[i] = out[i];
-
-  return data_M;    
-}
-
 const float *FPGA::blockMV(Compute* comp)
 {
   num_block_call_ += 1;
