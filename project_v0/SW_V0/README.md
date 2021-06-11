@@ -1,10 +1,16 @@
 # Final Project 
-This is official manual for your final project.
-Please follow the instructions and specs below.
+This is official manual for your final project.  
+Please follow the instructions and specs below.   
+Keep your eyes on updates as there may be some changes in specification / scoring criteria in future.
 
 ---
 ## Updates 
-(5/14) The due date has been extended to June 19.
+- (5/14) The due date has been extended to June 19.
+- (5/24) The official file and videos for the final project has been uploaded on ETL. 
+- (5/24) Updates to the scoring criteria
+- (5/25) Materials for quantization has been uploaded.
+- (6/4) Materials for zero-skipping has been uploaded.
+- (6/9) Updates to specs : Latency of your floating point MAC must be set as 16 cycles.
 
 ---
 
@@ -16,7 +22,14 @@ For now we do not consider accepting any delayed submission.
 
 ## Optimizing your work
 We suggest three different ways to optimize your work: **Quantization**, **Zero-Skipping**, and **DMA**(Direct Memory Access).  
-More information for each method will be given later.
+
+|              |        |         |         |
+|--------------|--------|---------|---------|
+| V0 (Baseline)| [Korean](http://etl.snu.ac.kr/mod/vod/view.php?id=1553770) | [English](http://etl.snu.ac.kr/mod/vod/view.php?id=1553879) |   [Files](http://etl.snu.ac.kr/mod/ubboard/article.php?id=1413711&bwid=2525754)      |
+| Quantization | [Korean](http://etl.snu.ac.kr/mod/vod/view.php?id=1554890) | [English](http://etl.snu.ac.kr/mod/vod/view.php?id=1554898)          | [Files](http://etl.snu.ac.kr/mod/ubboard/article.php?id=1413711&bwid=2544036)        |
+| Zero-skpping | [Korean](http://etl.snu.ac.kr/mod/vod/view.php?id=1567756)       |   [English](http://etl.snu.ac.kr/mod/vod/view.php?id=1567757)     |  [Files](http://etl.snu.ac.kr/mod/ubboard/article.php?id=1413711&bwid=2562718)       |
+| DMA          | [Korean](http://etl.snu.ac.kr/mod/vod/view.php?id=1547993) | [English](http://etl.snu.ac.kr/mod/vod/view.php?id=1547994) |   [Files](http://etl.snu.ac.kr/mod/ubboard/article.php?id=1413711&bwid=2535101)      |
+
 
 ---
 ## 1. Prepare your bitstream file
@@ -27,7 +40,7 @@ How the PE controller should be designed is explained [here.](http://etl.snu.ac.
 
 
 ## 2. Boot your device with the bitstream file
-Once you are prepared with bistream file, modify the name of it to "zynq.bit", and move it to the sdcard.  
+Once you are prepared with the bistream file, rename it to "zynq.bit", and move it to the sdcard.  
 Insert the sdcard to the device and boot it.  
 How you can boot your device via minicom is explained [here.](http://etl.snu.ac.kr/mod/ubboard/article.php?id=1413711&bwid=2500892)
 
@@ -69,17 +82,26 @@ sh benchmark.sh
 Hopefully you will get 100% accuracy on the classfication task!
 
 ---
-## Specification
-1. Accuracy on the classification task with CNN should be 100%. 
+## Specifications
+1. Accuracy on the classification task with CNN should be 100%.   
+  (Small degradation by quantization or zero-skipping will be allowed for particular cases.)
 2. The PE controller should consist of (at most) 8x8 (=64) PEs.
 3. The FSM should consist of 5 states: **IDLE** - **LOAD** - **CALC** - **HARV** - **DONE**  
-In HARV(harvest) state, the PE controller should write back the computed data to BRAM.
+4. During HARV(harvest) state, the PE controller should write back the computed data to BRAM.  
+You are not bound to this approach for optimizing V0. That means, you can also utilize pipelining.
+5. Latency of your floating point MAC must be set as 16 cycles.
 
 ---
-## Scoring Metrics
-1. Accuracy
-2. Inference Time 
-3. Report
+## Scoring Criteria
+Well explained in the videos.
+1. Implementation
+2. Inference time
+  - **Total computation time spent by HW** for V0, quantization, zero-skipping
+  - **Total data transfer time** for DMA
+  - Time spent by SW is not evaluted.
+3. Accuracy 
+4. Report 
+
 
 ---
 **Please use the Q&A board on ETL if you have questions or want more information about the project.**  
