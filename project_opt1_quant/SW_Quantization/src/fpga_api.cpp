@@ -55,6 +55,16 @@ FPGA::~FPGA()
   delete[] qout_;
 }
 
+float *FPGA::matrix(void)
+{
+  return data_ + v_size_;
+}
+
+float *FPGA::vector(void)
+{
+  return data_;
+}
+
 int *FPGA::qmatrix(void)
 {
   return qdata_ + v_size_;
@@ -173,8 +183,8 @@ const float *FPGA::blockMV(Compute* comp)
   num_block_call_ += 1;
 
   // cpu version
-  int *vec = this->qvector();
-  int *mat = this->qmatrix();
+  float *vec = this->vector();
+  float *mat = this->matrix();
   float *out = reinterpret_cast<float *>(output_);
 
   if(comp->quantized)
