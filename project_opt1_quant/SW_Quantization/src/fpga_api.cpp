@@ -85,7 +85,7 @@ int FPGA::num_block_call(void)
   return num_block_call_;
 }
 
-void quantize(const float* input, int* quantized, int num_input, int bits_min, int bits_max, int offset, float scale)
+void quantize(const float* input, char* quantized, int num_input, int bits_min, int bits_max, int offset, float scale)
 {
   for(int i = 0; i < num_input; i++)
   {
