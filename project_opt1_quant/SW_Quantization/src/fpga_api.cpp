@@ -218,48 +218,6 @@ const float *FPGA::blockMV(Compute* comp)
   return data_;
 }
 
-void FPGA::largeMM(const float* weight_mat, const float* input_mat, float* output, int num_input, int num_output, int num_matrix2, Compute* comp)
-{
-  float* m1 = this->matrix_M1();
-  float* m2 = this->matrix_M2();
-
-  // 0) Initialize output vector		
-  for(int i = 0; i < num_output*num_matrix2; ++i)
-    output[i] = 0;
-
-  for(int i = 0; i < num_output; i += v_size_)
-  {
-    for(int j = 0; j < num_input; j += v_size_)
-    {			
-      for(int k = 0; k < num_matrix2; k += v_size_)
-      {
-        // 0) Initialize input vector
-        int block_row = min(v_size_, num_output-i);
-        int block_col_1 = min(v_size_, num_input-j);
-        int block_col_2 = min(v_size_, num_matrix2-k);
-
-        // 1) Assign a m1
-        // IMPLEMENT THIS
-
-        // 2) Assign a m2
-        // IMPLEMENT THIS
-
-        // 3) Call a function `blockMM() to execute Matrix matrix multiplication
-        const int* ret = this->qblockMM(comp);
-
-        // 4) Accumulate intermediate results
-        for(int n = 0; n<block_row; ++n)
-        {
-          for(int m = 0; m<block_col_2; ++m)
-          {
-            output[(i + n) + (k + m)*num_output] += ret[n*v_size_ + m];
-          }
-        }
-      }
-    } 
-  }
-}
-
 void FPGA::largeMV(const float *large_mat, const float *input, float *output, int num_input, int num_output, Compute* comp)
 {
   float *vec = this->vector();
@@ -279,9 +237,20 @@ void FPGA::largeMV(const float *large_mat, const float *input, float *output, in
 
       // 1) Assign a vector
       // IMPLEMENT THIS
+			memcpy(vec, input + j, sizeof(float) * block_col);
+			memset(vec + block_col, 0, sizeof(float) * (v_size_ - block_col));
 
       // 2) Assign a matrix
       // IMPLEMENT THIS
+			for (int row = 0; row < block_row; ++row)
+			{
+				memcpy(mat + row * v_size_, large_mat + (row + i) * 
+							num_input + j, sizeof(float) * block_col);
+				memset(mat + row * v_size_ + block_col, 0, sizeof(float) * (v_size_ - block_col));
+			}
+      for (int row = block_row; row < m_size_; ++row) {
+				memset(mat + row * v_size_, 0, sizeof(float) * v_size_);
+      }
 
       // 3) Call a function `blockMV() to execute MV multiplication
       const float* ret = this->blockMV(comp);
@@ -290,6 +259,67 @@ void FPGA::largeMV(const float *large_mat, const float *input, float *output, in
       for (int row = 0; row < block_row; ++row)
         output[i + row] += ret[row];
     }
+  }
+}
+
+void FPGA::largeMM(const float* weight_mat, const float* input_mat, float* output, int num_input, int num_output, int num_matrix2, Compute* comp)
+{
+  float* m1 = this->matrix_M1();
+  float* m2 = this->matrix_M2();
+
+  // 0) Initialize output vector		
+  for(int i = 0; i < num_output*num_matrix2; ++i)
+    output[i] = 0;
+
+  for(int i = 0; i < num_output; i += v_size_)
+  {
+    for(int j = 0; j < num_input; j += v_size_)
+    {			
+      for(int k = 0; k < num_matrix2; k += v_size_)
+      {
+        // 0) Initialize input vector
+        // IMPLEMENT THIS
+        int block_row = min(v_size_, num_output-i);
+        int block_col_1 = min(v_size_, num_input-j);
+        int block_col_2 = min(v_size_, num_matrix2-k);
+
+        // 1) Assign a m1
+        // IMPLEMENT THIS
+        for (int m1_row = 0; m1_row < block_row; m1_row++) {
+          memcpy(m1 + m1_row * v_size_, weight_mat + (i + m1_row) *
+                num_input + j, sizeof(float) * block_col_1);
+				  memset(m1 + m1_row * v_size_ + block_col_1, 0, 
+                sizeof(float) * (v_size_ - block_col_1));
+        }
+        for (int m1_row = block_row; m1_row < v_size_; m1_row++) {
+          memset(m1 + m1_row * v_size_, 0, sizeof(float) * v_size_);
+        }
+
+        // 2) Assign a m2
+        // IMPLEMENT THIS
+        for (int m2_row = 0; m2_row < block_col_1; m2_row++) {
+          memcpy(m2 + m2_row * v_size_, input_mat + (j + m2_row) *
+                num_matrix2 + k, sizeof(float) * block_col_2);
+				  memset(m2 + m2_row * v_size_ + block_col_2, 0, 
+                sizeof(float) * (v_size_ - block_col_2));
+        }
+        for (int m2_row = block_col_1; m2_row < v_size_; m2_row++) {
+          memset(m2 + m2_row * v_size_, 0, sizeof(float) * v_size_);
+        }
+
+        // 3) Call a function `blockMM() to execute Matrix matrix multiplication
+        const int* ret = this->qblockMM(comp);
+
+        // 4) Accumulate intermediate results
+        for(int n = 0; n<block_row; ++n)
+        {
+          for(int m = 0; m<block_col_2; ++m)
+          {
+            output[(i + n) + (k + m)*num_output] += ret[n*v_size_ + m];
+          }
+        }
+      }
+    } 
   }
 }
 
@@ -320,4 +350,26 @@ void FPGA::convLowering(const std::vector<std::vector<std::vector<std::vector<fl
   // For example,
   // new_weights[0][0] = cnn_weights[0][0][0][0];
   // new_inputs[0][0] = inputs[0][0][0];
+  for (int i = 0; i < conv_channel; i++) {
+    for (int j = 0; j < input_channel; j++) {
+      for (int k = 0; k < conv_height; k++) {
+        for (int l = 0; l < conv_width; l++) {
+          new_weights[i][j * conv_height * conv_width +
+            k * conv_width + l] = cnn_weights[i][j][k][l];
+        }
+      }
+    }
+  }
+  for (int i = 0; i < input_channel; i++) {
+    for (int j = 0; j < input_height - conv_height + 1; j++) {
+      for (int k = 0; k < input_width - conv_width + 1; k++) {
+        for (int l = 0; l < conv_height; l++) {
+          for (int m = 0; m < conv_width; m++) {
+            new_inputs[i * conv_height * conv_width + l * conv_width + m][j * (input_height - conv_height + 1) + k] = 
+              inputs[i][j + l][k + m];
+          }
+        }
+      }
+    }
+  }
 }
