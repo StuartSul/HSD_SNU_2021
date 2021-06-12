@@ -160,6 +160,8 @@ const float *__attribute__((optimize("O0"))) FPGA::qblockMM(Compute* comp)
     }
     for (int i = 0; i < v_size_ * v_size_; ++i)
       qm1_[i] = qm1[i];
+    for (int i = 0; i < v_size_ * v_size_; ++i)
+      qout_M[i] = qm1_[i];
     
     // clock_t start = clock();
     // *custom_ip = 0x5555;
