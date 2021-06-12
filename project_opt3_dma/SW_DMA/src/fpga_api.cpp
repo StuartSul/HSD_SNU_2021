@@ -25,8 +25,8 @@ FPGA::FPGA(off_t data_addr, off_t output_addr, int m_size, int v_size)
   output_MV = new unsigned int[m_size_];
   // output_M = static_cast<unsigned int*>(NULL);
 
-  ps_dram = static_cast<float*>mmap(NULL, data_size_M, PROT_READ|PROT_WRITE, MAP_SHARED, fd_, 0x10000000);
-  fpga_dma = static_cast<unsigned int*>mmap(NULL, 16 * sizeof(unsigned int), PROT_READ|PROT_WRITE, MAP_SHARED, fd_, 0x7E200000);
+  ps_dram = static_cast<float*>(mmap(NULL, data_size_M, PROT_READ|PROT_WRITE, MAP_SHARED, fd_, 0x10000000));
+  fpga_dma = static_cast<unsigned int*>(mmap(NULL, 16 * sizeof(unsigned int), PROT_READ|PROT_WRITE, MAP_SHARED, fd_, 0x7E200000));
 
   num_block_call_ = 0;
 }
