@@ -147,7 +147,7 @@ void FPGA::largeMM(const float* weight_mat, const float* input_mat, float* outpu
 
         // Fill in rest of m2 column with zeros
         for (; idx < v_size_; ++idx)
-          m2[idx * v_size + i] = 0;
+          m2[idx * v_size_ + i] = 0;
       }
 
       // Fill in m1 and execute MM; reuse m2 several times since the result is overwritten on m1
@@ -158,8 +158,8 @@ void FPGA::largeMM(const float* weight_mat, const float* input_mat, float* outpu
         memset(m1, 0, v_size_ * v_size_);
 
         // Fill in weights that correspond to nonzero activations
-        for (int i = 0; i < block_weight_row) {
-          for (int j = 0; j < v_size_; j++)
+        for (int i = 0; i < block_weight_row; ++i) {
+          for (int j = 0; j < v_size_; ++j)
             m1[i * v_size_ + j] = (nonzero_idx[i * v_size_ + j] == -1) ? 0 :
                                     weight_mat[(weight_row + i) * num_input + 
                                       nonzero_idx[i * v_size_ + j]];
