@@ -4,8 +4,11 @@
 #include<unistd.h>
 #include<sys/mman.h>
 #include<cstring>
+#include<time.h>
 
 #define min(x,y) (((x)<(y))?(x):(y))
+
+double time_accum = 0.0;
 
 FPGA::FPGA(off_t data_addr, off_t output_addr, int m_size, int v_size)
 {
@@ -35,6 +38,7 @@ FPGA::~FPGA()
   close(fd_);
 
   delete[] data_;
+  printf("total hardware time cost: %f\n", time_accum/CLOCKS_PER_SEC);
 }
 
 float* FPGA::matrix(void)
@@ -94,8 +98,12 @@ const float* __attribute__((optimize("O0"))) FPGA::blockMM()
   num_block_call_ += 1;
 
   // fpga version
+  clock_t start = clock();
   *output_ = 0x5555;
   while(*output_ == 0x5555);
+  clock_t end = clock();
+
+  time_accum += (double)(end - start);
 
   return data_M;    
 }
