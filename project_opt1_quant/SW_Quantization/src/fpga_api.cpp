@@ -109,7 +109,7 @@ void quantize(const float* input, char* quantized, int num_input, int bits_min, 
 {
   for(int i = 0; i < num_input; i++)
   {
-    quantized[i] = (int)(input[i] / scale) + offset; // TODO: convert floating point to quantized value
+    quantized[i] = (char)(input[i] / scale) + offset; // TODO: convert floating point to quantized value
   }
 }
 
@@ -131,7 +131,6 @@ const float *__attribute__((optimize("O0"))) FPGA::qblockMM(Compute* comp)
   float* out = reinterpret_cast<float *>(output_M);
   char *qm1 = (char*)(this->qmatrix_M1());
   char *qm2 = (char*)(this->qmatrix_M1());
-  short *qout = (short*)(this->qmatrix_M1());
 
   if(comp->quantized) // if quantize is off, then do nothing since HW does not support float MM
   {
@@ -149,23 +148,12 @@ const float *__attribute__((optimize("O0"))) FPGA::qblockMM(Compute* comp)
     char weight_offset = 0;
     quantize(m1, qm1, v_size_ * v_size_, weight_bits_min, weight_bits_max, weight_offset, weight_scale);
 
-    // *custom_ip = 0x5555;
-    // while (*custom_ip == 0x5555)
-    //   ;
-    //
-    // for (int i = 0; i < v_size_ * v_size_; ++i)
-    //   qout_M[i] = qout[i];
-
-    for(int i = 0; i < v_size_; ++i)
-    {
-      for(int j = 0; j < v_size_; ++j){    
-        qm1_[v_size_*i+j] = 0;
-        for(int k = 0; k < v_size_; ++k){
-          qm1_[v_size_*i+j] += (qm1[v_size_*i+k]) * (qm2[v_size_*k + j]);
-        }
-      }
-    }for (int i = 0; i < v_size_ * v_size_; ++i)
-      qout_M[i] = qm1_[i];
+    *custom_ip = 0x5555;
+    while (*custom_ip == 0x5555)
+      ;
+    
+    for (int i = 0; i < v_size_ * v_size_; ++i)
+      qout_M[i] = qm1[i];
 
     dequantize(qout_M, out, v_size_*v_size_, 0, act_scale * weight_scale);
   }
