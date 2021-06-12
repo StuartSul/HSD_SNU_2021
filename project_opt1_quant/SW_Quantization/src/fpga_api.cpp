@@ -131,7 +131,7 @@ const float *__attribute__((optimize("O0"))) FPGA::qblockMM(Compute* comp)
   float* out = reinterpret_cast<float *>(output_M);
   char *qm1 = (char*)(this->qmatrix_M1());
   char *qm2 = (char*)(this->qmatrix_M1());
-  char *qout = (short*)(this->qmatrix_M1());
+  short *qout = (short*)(this->qmatrix_M1());
 
   if(comp->quantized) // if quantize is off, then do nothing since HW does not support float MM
   {
