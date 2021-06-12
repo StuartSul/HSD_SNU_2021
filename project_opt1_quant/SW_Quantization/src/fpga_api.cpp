@@ -152,9 +152,21 @@ const float *__attribute__((optimize("O0"))) FPGA::qblockMM(Compute* comp)
     quantize(m1, qm1, v_size_ * v_size_, weight_bits_min, weight_bits_max, weight_offset, weight_scale);
 
     clock_t start = clock();
-    *custom_ip = 0x5555;
-    while (*custom_ip == 0x5555)
-      ;
+
+    for(int i = 0; i < v_size_; ++i)
+    {
+      for(int j = 0; j < v_size_; ++j){    
+        qm1_[v_size_*i+j] = 0;
+        for(int k = 0; k < v_size_; ++k){
+          qm1_[v_size_*i+j] += (qm1[v_size_*i+k]) * (qm2[v_size_*k + j]);
+        }
+      }
+    }
+    for (int i = 0; i < v_size_ * v_size_; ++i)
+      qm1[i] = qm1_[i];
+    // *custom_ip = 0x5555;
+    // while (*custom_ip == 0x5555)
+    //   ;
     clock_t end = clock();
     
     time_accum += (double)(end - start);
