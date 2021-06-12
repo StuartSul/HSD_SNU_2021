@@ -132,8 +132,9 @@ const float *__attribute__((optimize("O0"))) FPGA::qblockMM(Compute* comp)
   float* m1 = this->matrix_M1();
   float* m2 = this->matrix_M2();
   float* out = reinterpret_cast<float *>(output_M);
-  char *qm1 = (char*)(this->qmatrix_M1());
-  char *qm2 = (char*)(this->qmatrix_M1());
+  char *qm1 = reinterpret_cast<char*>(this->qmatrix_M1());
+  char *qm2 = reinterpret_cast<char*>(this->qmatrix_M2());
+  short *qout = reinterpret_cast<short*>(this->qmatrix_M1());
 
   if(comp->quantized) // if quantize is off, then do nothing since HW does not support float MM
   {
@@ -149,38 +150,21 @@ const float *__attribute__((optimize("O0"))) FPGA::qblockMM(Compute* comp)
     float weight_scale = (comp->weight_max - comp->weight_min) / (float)weight_bits_max;
     quantize(m1, qm1, v_size_ * v_size_, weight_bits_min, weight_bits_max, 0, weight_scale);
 
-    for(int i = 0; i < v_size_; ++i)
-    {
-      for(int j = 0; j < v_size_; ++j){    
-        qm1_[v_size_*i+j] = 0;
-        for(int k = 0; k < v_size_; ++k){
-          qm1_[v_size_*i+j] += qm1[v_size_*i+k] * qm2[v_size_*k + j];
-        }
-      }
-    }
+    clock_t start = clock();
+    *custom_ip = 0x5555;
+    while (*custom_ip == 0x5555)
+      ;
+    clock_t end = clock();
+    
+    time_accum += (double)(end - start);
+    
     for (int i = 0; i < v_size_ * v_size_; ++i)
-      qm1_[i] = qm1[i];
-    for (int i = 0; i < v_size_ * v_size_; ++i)
-      qout_M[i] = qm1_[i];
-    
-    // clock_t start = clock();
-    // *custom_ip = 0x5555;
-    // while (*custom_ip == 0x5555)
-    //   ;
-    // clock_t end = clock();
-    
-    // time_accum += (double)(end - start);
-    
-    // for (int i = 0; i < v_size_ * v_size_; ++i)
-    //   qout_M[i] = qm1[i];
+      qout_M[i] = qout[i];
 
-    dequantize(qout_M, out, v_size_*v_size_, 0, act_scale * weight_scale);
+    dequantize(qout_M, out, v_size_*v_size_, 0, act_scale * weight_scale); // TODO complete dequantize function
   }
 
-  for(int i = 0; i < m1_size_; ++i)
-    data_M[i] = out[i];
-
-  return data_M;
+  return out;
 }
 
 const float *FPGA::blockMV(Compute* comp)
