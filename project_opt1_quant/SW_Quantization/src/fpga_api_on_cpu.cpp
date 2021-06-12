@@ -114,7 +114,7 @@ const float* FPGA::blockMM(Compute* comp)
     char weight_bits_min = 0;
     char weight_bits_max = (1<<(comp->weight_bits-1))-1;
 
-    float weight_scale = (comp->weight_max - comp->weight_min) / (float)weight_bits_max;; // TODO calculate the scale factor
+    float weight_scale = (comp->weight_max - comp->weight_min) / (float)weight_bits_max; // TODO calculate the scale factor
     char weight_offset = - comp->weight_min / weight_scale; // TODO calculate the zero-offset
     quantize(m1, qm1_, v_size_ * v_size_, weight_bits_min, weight_bits_max, weight_offset, weight_scale); // TODO complete quantize function
 

@@ -62,7 +62,7 @@ public:
   const float *blockMV(Compute* comp);
   const int *qblockMV(Compute* comp);
   const float *blockMM(Compute* comp);
-  const int *qblockMM(Compute* comp);
+  const float *qblockMM(Compute* comp);
 
   // Input vector size: num_input
   // Matrix size: num_output * num_input
