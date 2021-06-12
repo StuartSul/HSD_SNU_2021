@@ -28,7 +28,7 @@ private:
   int data_size_M;
   int num_block_call_;
 
-  unsigned int* nonzero_idx;
+  int *nonzero_idx;
 
 public:
   FPGA(off_t data_addr, off_t output_addr, int m_size, int v_size);

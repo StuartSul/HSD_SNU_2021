@@ -26,7 +26,7 @@ FPGA::FPGA(off_t data_addr, off_t output_addr, int m_size, int v_size)
 
   num_block_call_ = 0;
 
-  nonzero_idx = new unsigned int[v_size_ * v_size_];
+  nonzero_idx = new int[v_size_ * v_size_];
 }
 FPGA::~FPGA()
 {
