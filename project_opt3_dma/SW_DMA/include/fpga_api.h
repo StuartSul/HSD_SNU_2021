@@ -18,6 +18,8 @@ private:
   unsigned int *output_;
   unsigned int *output_M;
   unsigned int *output_MV;
+  unsigned int *fpga_dma;
+  float *ps_dram;
 
   int m_size_;
   int v_size_;
