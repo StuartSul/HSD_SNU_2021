@@ -14,11 +14,11 @@ class FPGA
 
 private:
   int fd_;
+  unsigned int custom_ip;
   float *data_;
   float *data_M;
-  unsigned int *output_;
-  unsigned int *output_M;
-  unsigned int *output_MV;
+  float *output_;
+  float *output_M;
 
   char *qvec_;
   char *qmat_;
@@ -60,7 +60,6 @@ public:
 
   // perform matrix multiplication and return output array pointer
   const float *blockMV(Compute* comp);
-  const int *qblockMV(Compute* comp);
   const float *blockMM(Compute* comp);
   const float *qblockMM(Compute* comp);
 
