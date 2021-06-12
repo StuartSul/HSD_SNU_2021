@@ -139,14 +139,14 @@ const float *__attribute__((optimize("O0"))) FPGA::qblockMM(Compute* comp)
     char act_bits_max = (1<<(comp->act_bits-1))-1;
 
     float act_scale = (comp->act_max - comp->act_min) / (float)act_bits_max;
-    char act_offset = - comp->act_min / act_scale;
+    char act_offset = 0;
     quantize(m2, qm2, v_size_ * v_size_, act_bits_min, act_bits_max, act_offset, act_scale);
 
     char weight_bits_min = 0;
     char weight_bits_max = (1<<(comp->weight_bits-1))-1;
 
     float weight_scale = (comp->weight_max - comp->weight_min) / (float)weight_bits_max;
-    char weight_offset = - comp->weight_min / weight_scale;
+    char weight_offset = 0;
     quantize(m1, qm1, v_size_ * v_size_, weight_bits_min, weight_bits_max, weight_offset, weight_scale);
 
     // *custom_ip = 0x5555;
@@ -161,7 +161,7 @@ const float *__attribute__((optimize("O0"))) FPGA::qblockMM(Compute* comp)
       for(int j = 0; j < v_size_; ++j){    
         qout_M[v_size_*i+j] = 0;
         for(int k = 0; k < v_size_; ++k){
-          qout_M[v_size_*i+j] += (qm1[v_size_*i+k] - weight_offset) * (qm2[v_size_*k + j] - act_offset);
+          qout_M[v_size_*i+j] += (qm1[v_size_*i+k]) * (qm2[v_size_*k + j]);
         }
       }
     }
