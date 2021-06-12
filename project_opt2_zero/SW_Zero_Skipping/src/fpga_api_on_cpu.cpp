@@ -25,6 +25,8 @@ FPGA::FPGA(off_t data_addr, off_t output_addr, int m_size, int v_size)
   data_M = new float[data_size_M]; // for Matrix matrix multiplication
 
   num_block_call_ = 0;
+
+  nonzero_idx = new unsigned int[v_size_ * v_size_];
 }
 FPGA::~FPGA()
 {
@@ -120,55 +122,71 @@ void FPGA::largeMM(const float* weight_mat, const float* input_mat, float* outpu
   for(int i = 0; i < num_output*num_matrix2; ++i)
     output[i] = 0;
 
-  for(int i = 0; i < num_output; i += v_size_)
-  {
-    for(int j = 0; j < num_input; j += v_size_)
-    {			
-      for(int k = 0; k < num_matrix2; k += v_size_)
-      {
-        // 0) Initialize input vector
-        int block_row = min(v_size_, num_output-i);
-        int block_col_1 = min(v_size_, num_input-j);
-        int block_col_2 = min(v_size_, num_matrix2-k);
+  for (int act_col = 0; act_col < num_matrix2; act_col += v_size_) {
+    int block_act_col = min(v_size_, num_matrix2 - act_col);
+    
+    // Initialize index array & m2 (for block_act_col could be less than v_size_)
+    memset(nonzero_idx, -1, v_size_ * v_size_);
+    memset(m2, 0, v_size_ * v_size_);
 
-        // 1) Assign a m1
-        // IMPLEMENT THIS
-        for (int m1_row = 0; m1_row < block_row; m1_row++) {
-          memcpy(m1 + m1_row * v_size_, weight_mat + (i + m1_row) *
-                num_input + j, sizeof(float) * block_col_1);
-				  memset(m1 + m1_row * v_size_ + block_col_1, 0, 
-                sizeof(float) * (v_size_ - block_col_1));
-        }
-        for (int m1_row = block_row; m1_row < v_size_; m1_row++) {
-          memset(m1 + m1_row * v_size_, 0, sizeof(float) * v_size_);
-        }
+    while (true) {
+      // Search for nonzero indices in each column of activation matrix
+      for (int i = 0; i < block_act_col; i++) {
+        int idx = 0;
+        int j = nonzero_idx[(i + 1) * v_size_ - 1] + 1;
+        memset(nonzero_idx + i * v_size_, -1, v_size_);
 
-        // 2) Assign a m2
-        // IMPLEMENT THIS
-        for (int m2_row = 0; m2_row < block_col_1; m2_row++) {
-          memcpy(m2 + m2_row * v_size_, input_mat + (j + m2_row) *
-                num_matrix2 + k, sizeof(float) * block_col_2);
-				  memset(m2 + m2_row * v_size_ + block_col_2, 0, 
-                sizeof(float) * (v_size_ - block_col_2));
-        }
-        for (int m2_row = block_col_1; m2_row < v_size_; m2_row++) {
-          memset(m2 + m2_row * v_size_, 0, sizeof(float) * v_size_);
+        // Put nonzero activation in m2 and save the index
+        for (; j < num_input && idx < v_size_; ++j) {
+          if (input_mat[j * num_matrix2 + act_col + i] != 0) {
+            m2[idx * v_size_ + i] = input_mat[j * num_matrix2 + act_col + i];
+            nonzero_idx[i * v_size_ + idx] = j;
+            idx += 1;
+          }
         }
 
+        // Fill in rest of m2 column with zeros
+        for (; idx < v_size_; ++idx)
+          m2[idx * v_size + i] = 0;
+      }
 
-        // 3) Call a function `blockMM() to execute Matrix matrix multiplication
+      // Fill in m1 and execute MM; reuse m2 several times since the result is overwritten on m1
+      for (int weight_row = 0; weight_row < num_output; weight_row += v_size_) {
+        int block_weight_row = min(v_size_, num_output - weight_row);
+
+        // Initialize m1 (for block_weight_row could be less than v_size_)
+        memset(m1, 0, v_size_ * v_size_);
+
+        // Fill in weights that correspond to nonzero activations
+        for (int i = 0; i < block_weight_row) {
+          for (int j = 0; j < v_size_; j++)
+            m1[i * v_size_ + j] = (nonzero_idx[i * v_size_ + j] == -1) ? 0 :
+                                    weight_mat[(weight_row + i) * num_input + 
+                                      nonzero_idx[i * v_size_ + j]];
+        }
+
+        // Execute custom IP
         const float* ret = this->blockMM();
 
-        // 4) Accumulate intermediate results
-        for(int n = 0; n<block_row; ++n)
+        // Accumulate intermediate results
+        for(int n = 0; n < block_weight_row; ++n)
         {
-          for(int m = 0; m<block_col_2; ++m)
+          for(int m = 0; m < block_act_col; ++m)
           {
-            output[(i + n) + (k + m)*num_output] += ret[n*v_size_ + m];
+            output[(weight_row + n) + (act_col + m)*num_output] += ret[n*v_size_ + m];
           }
         }
       }
-    } 
+
+      int exit_flag = 1;
+      for (int i = 0; i < v_size_; ++i) {
+        if (nonzero_idx[(i + 1) * v_size_ - 1] != -1 &&
+            nonzero_idx[(i + 1) * v_size_ - 1] != num_input - 1)
+          exit_flag = 0;
+      }
+      if (exit_flag)
+        break;
+    }
   }
 }
 
