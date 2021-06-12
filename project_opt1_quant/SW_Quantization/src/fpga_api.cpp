@@ -4,9 +4,11 @@
 #include <unistd.h>
 #include <sys/mman.h>
 #include <cstring>
-
+#include<time.h>
 
 #define min(x, y) (((x) < (y)) ? (x) : (y))
+
+double time_accum = 0.0;
 
 FPGA::FPGA(off_t data_addr, off_t output_addr, int m_size, int v_size)
 {
@@ -53,6 +55,7 @@ FPGA::~FPGA()
   delete[] qvec_;
   delete[] qmat_;
   delete[] qout_;
+  printf("total hardware time cost: %f\n", time_accum/CLOCKS_PER_SEC);
 }
 
 float *FPGA::matrix(void)
@@ -148,9 +151,13 @@ const float *__attribute__((optimize("O0"))) FPGA::qblockMM(Compute* comp)
     char weight_offset = 0;
     quantize(m1, qm1, v_size_ * v_size_, weight_bits_min, weight_bits_max, weight_offset, weight_scale);
 
+    clock_t start = clock();
     *custom_ip = 0x5555;
     while (*custom_ip == 0x5555)
       ;
+    clock_t end = clock();
+    
+    time_accum += (double)(end - start);
     
     for (int i = 0; i < v_size_ * v_size_; ++i)
       qout_M[i] = qm1[i];
