@@ -14,7 +14,7 @@ class FPGA
 
 private:
   int fd_;
-  unsigned int custom_ip;
+  unsigned int *custom_ip;
   float *data_;
   float *data_M;
   float *output_;
