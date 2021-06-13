@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<webTalkData  fileName='usage_statistics_webtalk.xml'  majorVersion='1' minorVersion='0' timeStamp='Tue May 18 12:54:59 2021'>
+<webTalkData  fileName='usage_statistics_webtalk.xml'  majorVersion='1' minorVersion='0' timeStamp='Sun Jun 13 15:25:40 2021'>
 <section name="__ROOT__" level="0" order="1" description="">
  <section name="software_version_and_target_device" level="1" order="1" description="">
   <keyValuePair key="beta" value="FALSE" description="" />
   <keyValuePair key="build_version" value="2405991" description="" />
-  <keyValuePair key="date_generated" value="Tue May 18 12:54:59 2021" description="" />
+  <keyValuePair key="date_generated" value="Sun Jun 13 15:25:39 2021" description="" />
   <keyValuePair key="os_platform" value="WIN64" description="" />
   <keyValuePair key="product_version" value="Vivado v2018.3 (64-bit)" description="" />
   <keyValuePair key="project_id" value="84a397a794e745e5be2e3ef64d4a9b22" description="" />
-  <keyValuePair key="project_iteration" value="3" description="" />
+  <keyValuePair key="project_iteration" value="4" description="" />
   <keyValuePair key="random_id" value="7e339ced1b7a520d9a68b8da9b83fb05" description="" />
   <keyValuePair key="registration_id" value="211831840_0_0_251" description="" />
   <keyValuePair key="route_design" value="TRUE" description="" />
@@ -89,7 +89,6 @@
    <keyValuePair key="c_axi_ruser_width" value="1" description="" />
    <keyValuePair key="c_axi_supports_user_signals" value="0" description="" />
    <keyValuePair key="c_axi_wuser_width" value="1" description="" />
-   <keyValuePair key="c_connectivity_mode" value="1" description="" />
    <keyValuePair key="c_family" value="zynq" description="" />
    <keyValuePair key="c_m_axi_addr_width" value="0x000000100000000d" description="" />
    <keyValuePair key="c_m_axi_base_addr" value="0x0000000043c000000000000040000000" description="" />
@@ -106,7 +105,6 @@
    <keyValuePair key="c_s_axi_base_id" value="0x00000000" description="" />
    <keyValuePair key="c_s_axi_read_acceptance" value="0x00000008" description="" />
    <keyValuePair key="c_s_axi_single_thread" value="0x00000000" description="" />
-   <keyValuePair key="c_s_axi_thread_id_width" value="0x0000000c" description="" />
    <keyValuePair key="c_s_axi_write_acceptance" value="0x00000008" description="" />
    <keyValuePair key="core_container" value="NA" description="" />
    <keyValuePair key="iptotal" value="1" description="" />
@@ -117,6 +115,7 @@
    <keyValuePair key="x_ipproduct" value="Vivado 2018.3" description="" />
    <keyValuePair key="x_ipsimlanguage" value="MIXED" description="" />
    <keyValuePair key="x_ipvendor" value="xilinx.com" description="" />
+   <keyValuePair key="x_ipversion" value="4.1" description="" />
    <keyValuePair key="x_ipversion" value="2.1" description="" />
   </section>
   <section name="axi_protocol_converter_v2_1_18_axi_protocol_converter/1" level="2" order="4" description="">
@@ -130,7 +129,6 @@
    <keyValuePair key="c_axi_supports_read" value="1" description="" />
    <keyValuePair key="c_axi_supports_user_signals" value="0" description="" />
    <keyValuePair key="c_axi_supports_write" value="1" description="" />
-   <keyValuePair key="c_axi_wuser_width" value="1" description="" />
    <keyValuePair key="c_family" value="zynq" description="" />
    <keyValuePair key="c_ignore_id" value="0" description="" />
    <keyValuePair key="c_m_axi_protocol" value="2" description="" />
@@ -146,6 +144,7 @@
    <keyValuePair key="x_ipsimlanguage" value="MIXED" description="" />
    <keyValuePair key="x_ipvendor" value="xilinx.com" description="" />
    <keyValuePair key="x_ipversion" value="2.1" description="" />
+   <keyValuePair key="x_ipversion" value="2.1" description="" />
   </section>
   <section name="axi_protocol_converter_v2_1_18_axi_protocol_converter/2" level="2" order="5" description="">
    <keyValuePair key="c_axi_addr_width" value="32" description="" />
@@ -158,7 +157,6 @@
    <keyValuePair key="c_axi_supports_read" value="1" description="" />
    <keyValuePair key="c_axi_supports_user_signals" value="0" description="" />
    <keyValuePair key="c_axi_supports_write" value="1" description="" />
-   <keyValuePair key="c_axi_wuser_width" value="1" description="" />
    <keyValuePair key="c_family" value="zynq" description="" />
    <keyValuePair key="c_ignore_id" value="0" description="" />
    <keyValuePair key="c_m_axi_protocol" value="0" description="" />
@@ -173,6 +171,7 @@
    <keyValuePair key="x_ipproduct" value="Vivado 2018.3" description="" />
    <keyValuePair key="x_ipsimlanguage" value="MIXED" description="" />
    <keyValuePair key="x_ipvendor" value="xilinx.com" description="" />
+   <keyValuePair key="x_ipversion" value="2.1" description="" />
    <keyValuePair key="x_ipversion" value="2.1" description="" />
   </section>
   <section name="blk_mem_gen_v8_4_2/1" level="2" order="6" description="">
@@ -706,9 +705,7 @@
    <keyValuePair key="c_fclk_clk1_buf" value="FALSE" description="" />
    <keyValuePair key="c_fclk_clk2_buf" value="FALSE" description="" />
    <keyValuePair key="c_fclk_clk3_buf" value="FALSE" description="" />
-   <keyValuePair key="c_gp0_en_modifiable_txn" value="1" description="" />
    <keyValuePair key="c_gp1_en_modifiable_txn" value="1" description="" />
-   <keyValuePair key="c_include_acp_trans_check" value="0" description="" />
    <keyValuePair key="c_include_trace_buffer" value="0" description="" />
    <keyValuePair key="c_irq_f2p_mode" value="DIRECT" description="" />
    <keyValuePair key="c_m_axi_gp0_enable_static_remap" value="0" description="" />
@@ -716,7 +713,6 @@
    <keyValuePair key="c_m_axi_gp0_thread_id_width" value="12" description="" />
    <keyValuePair key="c_m_axi_gp1_enable_static_remap" value="0" description="" />
    <keyValuePair key="c_m_axi_gp1_id_width" value="12" description="" />
-   <keyValuePair key="c_m_axi_gp1_thread_id_width" value="12" description="" />
    <keyValuePair key="c_mio_primitive" value="54" description="" />
    <keyValuePair key="c_num_f2p_intr_inputs" value="1" description="" />
    <keyValuePair key="c_package_name" value="clg484" description="" />
@@ -751,6 +747,7 @@
    <keyValuePair key="c_use_s_axi_hp3" value="0" description="" />
    <keyValuePair key="core_container" value="NA" description="" />
    <keyValuePair key="iptotal" value="1" description="" />
+   <keyValuePair key="pcw_wdt_peripheral_freqmhz" value="133.333333" description="" />
    <keyValuePair key="use_trace_data_edge_detector" value="0" description="" />
    <keyValuePair key="x_ipcorerevision" value="6" description="" />
    <keyValuePair key="x_iplanguage" value="VERILOG" description="" />
@@ -888,7 +885,7 @@
    <keyValuePair key="output_load" value="5.000000" description="" />
    <keyValuePair key="output_toggle" value="12.500000" description="" />
    <keyValuePair key="package" value="clg484" description="" />
-   <keyValuePair key="pct_clock_constrained" value="78.000000" description="" />
+   <keyValuePair key="pct_clock_constrained" value="80.000000" description="" />
    <keyValuePair key="pct_inputs_defined" value="0" description="" />
    <keyValuePair key="platform" value="nt64" description="" />
    <keyValuePair key="process" value="typical" description="" />
@@ -1267,10 +1264,10 @@
    <keyValuePair key="-verilog_define" value="default::[not_specified]" description="" />
   </section>
   <section name="usage" level="2" order="2" description="">
-   <keyValuePair key="elapsed" value="00:06:44s" description="" />
+   <keyValuePair key="elapsed" value="00:07:02s" description="" />
    <keyValuePair key="hls_ip" value="0" description="" />
-   <keyValuePair key="memory_gain" value="1580.777MB" description="" />
-   <keyValuePair key="memory_peak" value="1873.164MB" description="" />
+   <keyValuePair key="memory_gain" value="1580.367MB" description="" />
+   <keyValuePair key="memory_peak" value="1873.645MB" description="" />
   </section>
  </section>
  <section name="unisim_transformation" level="1" order="10" description="">
@@ -1327,40 +1324,51 @@
    <keyValuePair key="addrepositoryinfodialog_repository_tree" value="1" description="" />
    <keyValuePair key="addresstreetablepanel_address_tree_table" value="5" description="" />
    <keyValuePair key="basedialog_cancel" value="1" description="" />
-   <keyValuePair key="basedialog_ok" value="10" description="" />
-   <keyValuePair key="basedialog_yes" value="3" description="" />
-   <keyValuePair key="basereporttab_rerun" value="2" description="" />
+   <keyValuePair key="basedialog_ok" value="11" description="" />
+   <keyValuePair key="basedialog_yes" value="4" description="" />
+   <keyValuePair key="basereporttab_rerun" value="3" description="" />
    <keyValuePair key="boardchooser_board_table" value="1" description="" />
    <keyValuePair key="commandsinput_type_tcl_command_here" value="2" description="" />
-   <keyValuePair key="filesetpanel_file_set_panel_tree" value="3" description="" />
-   <keyValuePair key="flownavigatortreepanel_flow_navigator_tree" value="5" description="" />
+   <keyValuePair key="filesetpanel_file_set_panel_tree" value="16" description="" />
+   <keyValuePair key="flownavigatortreepanel_flow_navigator_tree" value="9" description="" />
    <keyValuePair key="gettingstartedview_create_new_project" value="1" description="" />
+   <keyValuePair key="gettingstartedview_open_project" value="2" description="" />
    <keyValuePair key="ipstatussectionpanel_upgrade_selected" value="3" description="" />
-   <keyValuePair key="mainmenumgr_reports" value="4" description="" />
+   <keyValuePair key="mainmenumgr_reports" value="6" description="" />
    <keyValuePair key="msgview_clear_messages_resulting_from_user_executed" value="1" description="" />
    <keyValuePair key="pacommandnames_create_top_hdl" value="1" description="" />
-   <keyValuePair key="pacommandnames_report_ip_status" value="2" description="" />
-   <keyValuePair key="paviews_project_summary" value="3" description="" />
+   <keyValuePair key="pacommandnames_report_ip_status" value="3" description="" />
+   <keyValuePair key="pacommandnames_zoom_in" value="1" description="" />
+   <keyValuePair key="pacommandnames_zoom_out" value="1" description="" />
+   <keyValuePair key="paviews_code" value="1" description="" />
+   <keyValuePair key="paviews_ip_catalog" value="1" description="" />
+   <keyValuePair key="paviews_project_summary" value="4" description="" />
+   <keyValuePair key="progressdialog_cancel" value="1" description="" />
    <keyValuePair key="projectnamechooser_choose_project_location" value="1" description="" />
    <keyValuePair key="projectnamechooser_project_name" value="1" description="" />
-   <keyValuePair key="settingsdialog_project_tree" value="3" description="" />
+   <keyValuePair key="settingsdialog_project_tree" value="10" description="" />
    <keyValuePair key="settingsprojectiprepositorypage_add_repository" value="1" description="" />
    <keyValuePair key="simpleoutputproductdialog_generate_output_products_immediately" value="3" description="" />
-   <keyValuePair key="syntheticagettingstartedview_recent_projects" value="1" description="" />
+   <keyValuePair key="stalemoreaction_out_of_date_details" value="3" description="" />
+   <keyValuePair key="syntheticagettingstartedview_recent_projects" value="2" description="" />
    <keyValuePair key="systemtab_show_ip_status" value="1" description="" />
    <keyValuePair key="taskbanner_close" value="5" description="" />
   </section>
   <section name="java_command_handlers" level="2" order="2" description="">
    <keyValuePair key="closeproject" value="1" description="" />
+   <keyValuePair key="coreview" value="1" description="" />
    <keyValuePair key="createtophdl" value="1" description="" />
    <keyValuePair key="newproject" value="1" description="" />
-   <keyValuePair key="reportipstatus" value="2" description="" />
-   <keyValuePair key="runbitgen" value="4" description="" />
-   <keyValuePair key="toolssettings" value="1" description="" />
+   <keyValuePair key="openproject" value="2" description="" />
+   <keyValuePair key="reportipstatus" value="3" description="" />
+   <keyValuePair key="runbitgen" value="5" description="" />
+   <keyValuePair key="toolssettings" value="3" description="" />
    <keyValuePair key="upgradeip" value="3" description="" />
+   <keyValuePair key="zoomin" value="1" description="" />
+   <keyValuePair key="zoomout" value="1" description="" />
   </section>
   <section name="other_data" level="2" order="3" description="">
-   <keyValuePair key="guimode" value="7" description="" />
+   <keyValuePair key="guimode" value="10" description="" />
   </section>
   <section name="project_data" level="2" order="4" description="">
    <keyValuePair key="constraintsetcount" value="0" description="" />

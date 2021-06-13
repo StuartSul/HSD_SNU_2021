@@ -60,7 +60,6 @@ proc step_failed { step } {
   close $ch
 }
 
-set_msg_config -id {Common 17-41} -limit 10000000
 
 start_step init_design
 set ACTIVE_STEP init_design
@@ -70,17 +69,17 @@ set rc [catch {
   set_property board_part em.avnet.com:zed:part0:1.4 [current_project]
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0
-  set_property webtalk.parent_dir D:/HSD_SNU_2021/project/block_design/block_design.cache/wt [current_project]
-  set_property parent.project_path D:/HSD_SNU_2021/project/block_design/block_design.xpr [current_project]
-  set_property ip_repo_paths D:/HSD_SNU_2021/project/custom_ip [current_project]
+  set_property webtalk.parent_dir D:/HSD_SNU_2021/project_opt2_zero/HW_Zero_Skipping/block_design/block_design.cache/wt [current_project]
+  set_property parent.project_path D:/HSD_SNU_2021/project_opt2_zero/HW_Zero_Skipping/block_design/block_design.xpr [current_project]
+  set_property ip_repo_paths D:/HSD_SNU_2021/project_opt2_zero/HW_Zero_Skipping/custom_ip [current_project]
   update_ip_catalog
-  set_property ip_output_repo D:/HSD_SNU_2021/project/block_design/block_design.cache/ip [current_project]
+  set_property ip_output_repo D:/HSD_SNU_2021/project_opt2_zero/HW_Zero_Skipping/block_design/block_design.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
   set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY} [current_project]
-  add_files -quiet D:/HSD_SNU_2021/project/block_design/block_design.runs/synth_1/design_1_wrapper.dcp
+  add_files -quiet D:/HSD_SNU_2021/project_opt2_zero/HW_Zero_Skipping/block_design/block_design.runs/synth_1/design_1_wrapper.dcp
   set_msg_config -source 4 -id {BD 41-1661} -limit 0
   set_param project.isImplRun true
-  add_files D:/HSD_SNU_2021/project/block_design/block_design.srcs/sources_1/bd/design_1/design_1.bd
+  add_files D:/HSD_SNU_2021/project_opt2_zero/HW_Zero_Skipping/block_design/block_design.srcs/sources_1/bd/design_1/design_1.bd
   set_param project.isImplRun false
   set_param project.isImplRun true
   link_design -top design_1_wrapper -part xc7z020clg484-1
