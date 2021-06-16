@@ -24,16 +24,17 @@ FPGA::FPGA(off_t data_addr, off_t output_addr, int m_size, int v_size)
   data_ = new float[data_size_];	
   data_M = new float[data_size_M]; // for Matrix matrix multiplication
 
-  num_block_call_ = 0;
+  nonzero_rows = new int[v_size_];
 
-  nonzero_idx = new int[v_size_ * v_size_];
+  num_block_call_ = 0;
 }
 FPGA::~FPGA()
 {
-  // delete[] output_;
+  delete[] output_;
   delete[] output_M;
-  // delete[] data_;
+  delete[] data_;
   delete[] data_M;
+  delete[] nonzero_rows;
 }
 
 float* FPGA::matrix(void)
@@ -122,71 +123,76 @@ void FPGA::largeMM(const float* weight_mat, const float* input_mat, float* outpu
   for(int i = 0; i < num_output*num_matrix2; ++i)
     output[i] = 0;
 
-  for (int act_col = 0; act_col < num_matrix2; act_col += v_size_) {
-    int block_act_col = min(v_size_, num_matrix2 - act_col);
-    
-    // Initialize index array & m2 (for block_act_col could be less than v_size_)
-    memset(nonzero_idx, -1, v_size_ * v_size_);
-    memset(m2, 0, v_size_ * v_size_);
+  for(int i = 0; i < num_output; i += v_size_)
+  {
+    for(int k = 0; k < num_matrix2; k += v_size_)
+    {			
+      for(int j = 0; j < num_input; )
+      {
+        // 0) Initialize input vector
+        // IMPLEMENT THIS
+        int block_row = min(v_size_, num_output-i);
+        int block_col_1 = min(v_size_, num_input-j);
+        int block_col_2 = min(v_size_, num_matrix2-k);
 
-    while (true) {
-      // Search for nonzero indices in each column of activation matrix
-      for (int i = 0; i < block_act_col; i++) {
-        int idx = 0;
-        int j = nonzero_idx[(i + 1) * v_size_ - 1] + 1;
-        memset(nonzero_idx + i * v_size_, -1, v_size_);
-
-        // Put nonzero activation in m2 and save the index
-        for (; j < num_input && idx < v_size_; ++j) {
-          if (input_mat[j * num_matrix2 + act_col + i] != 0) {
-            m2[idx * v_size_ + i] = input_mat[j * num_matrix2 + act_col + i];
-            nonzero_idx[i * v_size_ + idx] = j;
-            idx += 1;
+        // 1) Decide which activation rows to add
+        int skip_flag = 1;
+        for (int m2_row = 0; m2_row < v_size_; j++) {
+          if (j == num_input) {
+            for (; m2_row < v_size_; m2_row++)
+              nonzero_rows[m2_row] = -1;
+            break;
+          }
+          for (int m2_col = 0; m2_col < block_col_2; m2_col++) {
+            if (input_mat[j * num_matrix2 + k + m2_col] != 0) {
+              nonzero_rows[m2_row] = j;
+              m2_row++; 
+              skip_flag = 0;
+              break;
+            }
           }
         }
 
-        // Fill in rest of m2 column with zeros
-        for (; idx < v_size_; ++idx)
-          m2[idx * v_size_ + i] = 0;
-      }
+        // 2) If all rows are zero, skip computation completely
+        if (skip_flag)
+          break;
 
-      // Fill in m1 and execute MM; reuse m2 several times since the result is overwritten on m1
-      for (int weight_row = 0; weight_row < num_output; weight_row += v_size_) {
-        int block_weight_row = min(v_size_, num_output - weight_row);
-
-        // Initialize m1 (for block_weight_row could be less than v_size_)
-        memset(m1, 0, v_size_ * v_size_);
-
-        // Fill in weights that correspond to nonzero activations
-        for (int i = 0; i < block_weight_row; ++i) {
-          for (int j = 0; j < v_size_; ++j)
-            m1[i * v_size_ + j] = (nonzero_idx[i * v_size_ + j] == -1) ? 0 :
-                                    weight_mat[(weight_row + i) * num_input + 
-                                      nonzero_idx[i * v_size_ + j]];
+        // 3) Assign a m1
+        // IMPLEMENT THIS
+        for (int m1_row = 0; m1_row < block_row; m1_row++) {
+          for (int m1_col = 0; m1_col < v_size_; m1_col++)
+            m1[m1_row * v_size_ + m1_col] = (nonzero_rows[m1_col] == -1) ? 0 :
+                  weight_mat[(i + m1_row) * num_input + nonzero_rows[m1_col]];
+        }
+        for (int m1_row = block_row; m1_row < v_size_; m1_row++) {
+          memset(m1 + m1_row * v_size_, 0, sizeof(float) * v_size_);
         }
 
-        // Execute custom IP
+        // 4) Assign a m2
+        // IMPLEMENT THIS
+        for (int m2_row = 0; m2_row < v_size_; m2_row++) {
+          if (nonzero_rows[m2_row] == -1)
+				    memset(m2 + m2_row * v_size_, 0, sizeof(float) * block_col_2);
+          else
+            memcpy(m2 + m2_row * v_size_, input_mat + nonzero_rows[m2_row]
+                    * num_matrix2 + k, sizeof(float) * block_col_2);
+          memset(m2 + m2_row * v_size_ + block_col_2, 0, 
+                      sizeof(float) * (v_size_ - block_col_2));
+        }
+
+        // 5) Call a function `blockMM() to execute Matrix matrix multiplication
         const float* ret = this->blockMM();
 
-        // Accumulate intermediate results
-        for(int n = 0; n < block_weight_row; ++n)
+        // 6) Accumulate intermediate results
+        for(int n = 0; n<block_row; ++n)
         {
-          for(int m = 0; m < block_act_col; ++m)
+          for(int m = 0; m<block_col_2; ++m)
           {
-            output[(weight_row + n) + (act_col + m)*num_output] += ret[n*v_size_ + m];
+            output[(i + n) + (k + m)*num_output] += ret[n*v_size_ + m];
           }
         }
       }
-
-      int exit_flag = 1;
-      for (int i = 0; i < v_size_; ++i) {
-        if (nonzero_idx[(i + 1) * v_size_ - 1] != -1 &&
-            nonzero_idx[(i + 1) * v_size_ - 1] != num_input - 1)
-          exit_flag = 0;
-      }
-      if (exit_flag)
-        break;
-    }
+    } 
   }
 }
 

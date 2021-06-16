@@ -28,6 +28,8 @@ FPGA::FPGA(off_t data_addr, off_t output_addr, int m_size, int v_size)
   output_MV = new unsigned int[m_size_];
   // output_M = static_cast<unsigned int*>(NULL);
 
+  nonzero_rows = new int[v_size_];
+
   num_block_call_ = 0;
 }
 
@@ -38,6 +40,8 @@ FPGA::~FPGA()
   close(fd_);
 
   delete[] data_;
+  delete[] output_MV;
+  delete[] nonzero_rows;
   printf("total hardware time cost: %f\n", time_accum/CLOCKS_PER_SEC);
 }
 
@@ -163,9 +167,9 @@ void FPGA::largeMM(const float* weight_mat, const float* input_mat, float* outpu
 
   for(int i = 0; i < num_output; i += v_size_)
   {
-    for(int j = 0; j < num_input; j += v_size_)
+    for(int k = 0; k < num_matrix2; k += v_size_)
     {			
-      for(int k = 0; k < num_matrix2; k += v_size_)
+      for(int j = 0; j < num_input; )
       {
         // 0) Initialize input vector
         // IMPLEMENT THIS
@@ -173,34 +177,55 @@ void FPGA::largeMM(const float* weight_mat, const float* input_mat, float* outpu
         int block_col_1 = min(v_size_, num_input-j);
         int block_col_2 = min(v_size_, num_matrix2-k);
 
-        // 1) Assign a m1
+        // 1) Decide which activation rows to add
+        int skip_flag = 1;
+        for (int m2_row = 0; m2_row < v_size_; j++) {
+          if (j == num_input) {
+            for (; m2_row < v_size_; m2_row++)
+              nonzero_rows[m2_row] = -1;
+            break;
+          }
+          for (int m2_col = 0; m2_col < block_col_2; m2_col++) {
+            if (input_mat[j * num_matrix2 + k + m2_col] != 0) {
+              nonzero_rows[m2_row] = j;
+              m2_row++; 
+              skip_flag = 0;
+              break;
+            }
+          }
+        }
+
+        // 2) If all rows are zero, skip computation completely
+        if (skip_flag)
+          break;
+
+        // 3) Assign a m1
         // IMPLEMENT THIS
         for (int m1_row = 0; m1_row < block_row; m1_row++) {
-          memcpy(m1 + m1_row * v_size_, weight_mat + (i + m1_row) *
-                num_input + j, sizeof(float) * block_col_1);
-				  memset(m1 + m1_row * v_size_ + block_col_1, 0, 
-                sizeof(float) * (v_size_ - block_col_1));
+          for (int m1_col = 0; m1_col < v_size_; m1_col++)
+            m1[m1_row * v_size_ + m1_col] = (nonzero_rows[m1_col] == -1) ? 0 :
+                  weight_mat[(i + m1_row) * num_input + nonzero_rows[m1_col]];
         }
         for (int m1_row = block_row; m1_row < v_size_; m1_row++) {
           memset(m1 + m1_row * v_size_, 0, sizeof(float) * v_size_);
         }
 
-        // 2) Assign a m2
+        // 4) Assign a m2
         // IMPLEMENT THIS
-        for (int m2_row = 0; m2_row < block_col_1; m2_row++) {
-          memcpy(m2 + m2_row * v_size_, input_mat + (j + m2_row) *
-                num_matrix2 + k, sizeof(float) * block_col_2);
-				  memset(m2 + m2_row * v_size_ + block_col_2, 0, 
-                sizeof(float) * (v_size_ - block_col_2));
-        }
-        for (int m2_row = block_col_1; m2_row < v_size_; m2_row++) {
-          memset(m2 + m2_row * v_size_, 0, sizeof(float) * v_size_);
+        for (int m2_row = 0; m2_row < v_size_; m2_row++) {
+          if (nonzero_rows[m2_row] == -1)
+				    memset(m2 + m2_row * v_size_, 0, sizeof(float) * block_col_2);
+          else
+            memcpy(m2 + m2_row * v_size_, input_mat + nonzero_rows[m2_row]
+                    * num_matrix2 + k, sizeof(float) * block_col_2);
+          memset(m2 + m2_row * v_size_ + block_col_2, 0, 
+                      sizeof(float) * (v_size_ - block_col_2));
         }
 
-        // 3) Call a function `blockMM() to execute Matrix matrix multiplication
+        // 5) Call a function `blockMM() to execute Matrix matrix multiplication
         const float* ret = this->blockMM();
 
-        // 4) Accumulate intermediate results
+        // 6) Accumulate intermediate results
         for(int n = 0; n<block_row; ++n)
         {
           for(int m = 0; m<block_col_2; ++m)
