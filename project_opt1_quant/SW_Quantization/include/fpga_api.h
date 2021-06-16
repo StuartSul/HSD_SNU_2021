@@ -61,7 +61,7 @@ public:
   // perform matrix multiplication and return output array pointer
   const float *blockMV(Compute* comp);
   const float *blockMM(Compute* comp);
-  const float *qblockMM(Compute* comp);
+  void qblockMM();
 
   // Input vector size: num_input
   // Matrix size: num_output * num_input

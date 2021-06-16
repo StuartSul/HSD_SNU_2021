@@ -124,11 +124,21 @@ void dequantize(int* quantized, float* output, int num_output, int offset, float
   }
 }
 
-const float *__attribute__((optimize("O0"))) FPGA::qblockMM(Compute* comp)
+void __attribute__((optimize("O0"))) FPGA::qblockMM()
 {
   num_block_call_ += 1;
 
   // fpga version
+  clock_t start = clock();
+  *custom_ip = 0x5555;
+  while (*custom_ip == 0x5555);
+  clock_t end = clock();
+  
+  time_accum += (double)(end - start);
+}
+
+const float* FPGA::blockMM(Compute* comp)
+{
   float* m1 = this->matrix_M1();
   float* m2 = this->matrix_M2();
   float* out = reinterpret_cast<float *>(output_M);
@@ -150,13 +160,7 @@ const float *__attribute__((optimize("O0"))) FPGA::qblockMM(Compute* comp)
     float weight_scale = (comp->weight_max - comp->weight_min) / (float)weight_bits_max;
     quantize(m1, qm1, v_size_ * v_size_, weight_bits_min, weight_bits_max, 0, weight_scale);
 
-    clock_t start = clock();
-    *custom_ip = 0x5555;
-    while (*custom_ip == 0x5555)
-      ;
-    clock_t end = clock();
-    
-    time_accum += (double)(end - start);
+    qblockMM();
     
     for (int i = 0; i < v_size_ * v_size_; ++i)
       qout_M[i] = qout[i];
@@ -307,7 +311,7 @@ void FPGA::largeMM(const float* weight_mat, const float* input_mat, float* outpu
         }
 
         // 3) Call a function `blockMM() to execute Matrix matrix multiplication
-        const float* ret = this->qblockMM(comp);
+        const float* ret = this->blockMM(comp);
 
         // 4) Accumulate intermediate results
         for(int n = 0; n<block_row; ++n)
