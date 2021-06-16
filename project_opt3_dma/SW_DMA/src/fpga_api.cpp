@@ -18,27 +18,23 @@ FPGA::FPGA(off_t data_addr, off_t output_addr, int m_size, int v_size)
   data_size_M = (2*v_size_)*v_size_*sizeof(float);
 
   fd_ = open("/dev/mem", O_RDWR);
-  // data_M = static_cast<float*>(mmap(NULL, data_size_M, PROT_READ|PROT_WRITE, MAP_SHARED, fd_, data_addr));
-  data_ = new float[data_size_];	
+  data_M = static_cast<float*>(mmap(NULL, data_size_M, PROT_READ|PROT_WRITE, MAP_SHARED, fd_, 0x10000000));
+  data_ = new float[data_size_];
 
   output_ = static_cast<unsigned int*>(mmap(NULL, sizeof(unsigned int), PROT_READ|PROT_WRITE, MAP_SHARED,fd_, output_addr));
   output_MV = new unsigned int[m_size_];
-  // output_M = static_cast<unsigned int*>(NULL);
-
-  ps_dram = static_cast<float*>(mmap(NULL, data_size_M, PROT_READ|PROT_WRITE, MAP_SHARED, fd_, 0x10000000));
   fpga_dma = static_cast<unsigned int*>(mmap(NULL, 16 * sizeof(unsigned int), PROT_READ|PROT_WRITE, MAP_SHARED, fd_, 0x7E200000));
-
+  
   num_block_call_ = 0;
 }
 
 FPGA::~FPGA()
 {
-  // munmap(data_M, data_size_M);
   munmap(output_, sizeof(unsigned int));
-  munmap(ps_dram, data_size_);
   munmap(fpga_dma, 16 * sizeof(unsigned int));
   close(fd_);
 
+  delete[] output_MV;
   delete[] data_;
 }
 
@@ -54,12 +50,12 @@ float* FPGA::vector(void)
 
 float* FPGA::matrix_M1(void)
 {
-  return ps_dram;
+  return data_M;
 }
 
 float* FPGA::matrix_M2(void)
 {
-  return ps_dram + m1_size_;
+  return data_M + m1_size_;
 }
 
 void FPGA::reset(void)
@@ -97,12 +93,24 @@ const float* FPGA::blockMV()
 const float* __attribute__((optimize("O0"))) FPGA::blockMM()
 {
   num_block_call_ += 1;
+  
+  // DMA: DRAM -> BRAM
+  *(fpga_dma+6) = 0x10000000;
+  *(fpga_dma+8) = 0xC0000000;
+  *(fpga_dma+10) = 2 * v_size_ * v_size_ * sizeof(float);
+  while ((*(fpga_dma+1) & 0x00000002) == 0);
 
   // fpga version
   *output_ = 0x5555;
   while(*output_ == 0x5555);
 
-  return ps_dram;
+  // DMA: BRAM -> DRAM
+  *(fpga_dma+6) = 0xC0000000;
+  *(fpga_dma+8) = 0x10000000;
+  *(fpga_dma+10) = v_size_ * v_size_ * sizeof(float);
+  while ((*(fpga_dma+1) & 0x00000002) == 0);
+
+  return data_M;
 }
 
 void FPGA::largeMV(const float* large_mat, const float* input, float* output, int num_input, int num_output)
@@ -194,27 +202,15 @@ void FPGA::largeMM(const float* weight_mat, const float* input_mat, float* outpu
           memset(m2 + m2_row * v_size_, 0, sizeof(float) * v_size_);
         }
 
-        // 3) DRAM -> BRAM with CDMA
-        *(fpga_dma+6) = 0x10000000;
-        *(fpga_dma+8) = 0xC0000000;
-        *(fpga_dma+10) = data_size_M;
-        while ((*(fpga_dma+1) & 0x00000002) == 0);
+        // 3) Call a function `blockMM() to execute Matrix matrix multiplication
+        const float* ret = this->blockMM();
 
-        // 4) Call a function `blockMM() to execute Matrix matrix multiplication
-        this->blockMM();
-
-        // 5) BRAM -> DRAM with CDMA
-        *(fpga_dma+6) = 0xC0000000;
-        *(fpga_dma+8) = 0x10000000;
-        *(fpga_dma+10) = data_size_M / 2;
-        while ((*(fpga_dma+1) & 0x00000002) == 0);
-
-        // 6) Accumulate intermediate results
+        // 4) Accumulate intermediate results
         for(int n = 0; n<block_row; ++n)
         {
           for(int m = 0; m<block_col_2; ++m)
           {
-            output[(i + n) + (k + m)*num_output] += ps_dram[n*v_size_ + m];
+            output[(i + n) + (k + m)*num_output] += ret[n*v_size_ + m];
           }
         }
       }
