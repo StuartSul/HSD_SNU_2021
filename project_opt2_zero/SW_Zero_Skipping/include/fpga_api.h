@@ -28,8 +28,6 @@ private:
   int data_size_M;
   int num_block_call_;
 
-  int *nonzero_rows;
-
 public:
   FPGA(off_t data_addr, off_t output_addr, int m_size, int v_size);
   ~FPGA();

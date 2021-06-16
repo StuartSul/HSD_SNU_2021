@@ -24,8 +24,6 @@ FPGA::FPGA(off_t data_addr, off_t output_addr, int m_size, int v_size)
   data_ = new float[data_size_];	
   data_M = new float[data_size_M]; // for Matrix matrix multiplication
 
-  nonzero_rows = new int[v_size_];
-
   num_block_call_ = 0;
 }
 FPGA::~FPGA()
@@ -34,7 +32,6 @@ FPGA::~FPGA()
   delete[] output_M;
   delete[] data_;
   delete[] data_M;
-  delete[] nonzero_rows;
 }
 
 float* FPGA::matrix(void)
@@ -118,6 +115,7 @@ void FPGA::largeMM(const float* weight_mat, const float* input_mat, float* outpu
 {
   float* m1 = this->matrix_M1();
   float* m2 = this->matrix_M2();
+  int *nonzero_rows = new int[v_size_];
 
   // 0) Initialize output vector		
   for(int i = 0; i < num_output*num_matrix2; ++i)
@@ -194,6 +192,7 @@ void FPGA::largeMM(const float* weight_mat, const float* input_mat, float* outpu
       }
     } 
   }
+  delete[] nonzero_rows;
 }
 
 void FPGA::largeMV(const float* large_mat, const float* input, float* output, int num_input, int num_output)

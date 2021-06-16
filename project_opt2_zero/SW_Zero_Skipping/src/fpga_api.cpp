@@ -28,8 +28,6 @@ FPGA::FPGA(off_t data_addr, off_t output_addr, int m_size, int v_size)
   output_MV = new unsigned int[m_size_];
   // output_M = static_cast<unsigned int*>(NULL);
 
-  nonzero_rows = new int[v_size_];
-
   num_block_call_ = 0;
 }
 
@@ -41,7 +39,6 @@ FPGA::~FPGA()
 
   delete[] data_;
   delete[] output_MV;
-  delete[] nonzero_rows;
   printf("total hardware time cost: %f\n", time_accum/CLOCKS_PER_SEC);
 }
 
@@ -160,6 +157,7 @@ void FPGA::largeMM(const float* weight_mat, const float* input_mat, float* outpu
 {
   float* m1 = this->matrix_M1();
   float* m2 = this->matrix_M2();
+  int *nonzero_rows = new int[v_size_];
 
   // 0) Initialize output vector		
   for(int i = 0; i < num_output*num_matrix2; ++i)
@@ -236,6 +234,7 @@ void FPGA::largeMM(const float* weight_mat, const float* input_mat, float* outpu
       }
     } 
   }
+  delete[] nonzero_rows;
 }
 
 void FPGA::convLowering(const std::vector<std::vector<std::vector<std::vector<float>>>>& cnn_weights,
